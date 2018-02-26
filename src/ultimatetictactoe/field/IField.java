@@ -1,7 +1,7 @@
 package ultimatetictactoe.field;
 
 import java.util.List;
-import move.IMove;
+import ultimatetictactoe.move.IMove;
 
 /**
  *
