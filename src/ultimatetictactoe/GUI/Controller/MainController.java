@@ -60,27 +60,16 @@ public class MainController implements Initializable {
         for(int i = 0; i < 9; i++)
         {
             GridPane grid = (GridPane) MacroBoard.getChildren().get(i);
-
-            Label label = new Label();
-            grid.add(label, 1, 0);
-            label = new Label();
-            grid.add(label, 1, 1);
-            label = new Label();
-            grid.add(label, 1, 2);
-            label = new Label();
-            grid.add(label, 0, 0);
-            label = new Label();
-            grid.add(label, 0, 1);
-            label = new Label();
-            grid.add(label, 0, 2);
-            label = new Label();
-            grid.add(label, 2, 0);
-            label = new Label();
-            grid.add(label, 2, 1);
-            label = new Label();
-            grid.add(label, 2, 2);  
+            for(int y = 0;y<3;y++)
+            {
+            grid.add(new Label("X"), 0, y);
+            grid.add(new Label("X"), 1, y);
+            grid.add(new Label("X"), 2, y);
             
-            
+            grid.add(new Label("X"), y, 0);
+            grid.add(new Label("X"), y, 1);
+            grid.add(new Label("X"), y, 2);
+            }
         }
     }
     
