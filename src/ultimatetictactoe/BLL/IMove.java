@@ -1,4 +1,4 @@
-package ultimatetictactoe.move;
+package ultimatetictactoe.BLL;
 
 /**
  *
