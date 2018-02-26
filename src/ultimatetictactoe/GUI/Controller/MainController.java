@@ -52,7 +52,41 @@ public class MainController implements Initializable {
     }    
 
     @FXML
-    private void MacroBoardClick(MouseEvent event) {
+    private void MacroBoardClick(MouseEvent event) 
+    {
+        GridPane grid = null;
+        for(int i = 0;i<9;i++)
+        {
+            if(i<=MacroBoard.getChildren().size())
+            {
+             grid = (GridPane) MacroBoard.getChildren().get(i);
+            }
+            
+            
+            Label label = new Label("X");
+            grid.add(label, 1, 0);
+                 label = new Label("X");
+            grid.add(label, 1, 1);
+            label = new Label("X");
+            grid.add(label, 1, 2);
+           label = new Label("X");
+            grid.add(label, 0, 0);
+            label = new Label("X");
+            grid.add(label, 0, 1);
+            label = new Label("X");
+            grid.add(label, 0, 2);
+            label = new Label("X");
+            grid.add(label, 2, 0);
+            label = new Label("X");
+            grid.add(label, 2, 1);
+            label = new Label("X");
+            
+            grid.add(label, 2, 2);
+            
+            
+            
+
+        }
     }
     
 }
