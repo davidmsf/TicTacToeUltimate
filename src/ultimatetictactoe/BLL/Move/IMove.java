@@ -1,4 +1,4 @@
-package ultimatetictactoe.BLL;
+package ultimatetictactoe.BLL.Move;
 
 /**
  *

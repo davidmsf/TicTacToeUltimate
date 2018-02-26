@@ -1,4 +1,9 @@
-package ultimatetictactoe.BLL;
+package ultimatetictactoe.BLL.Game;
+
+import ultimatetictactoe.BLL.Bot.IBot;
+import ultimatetictactoe.BLL.Bot.IBot;
+import ultimatetictactoe.BLL.Move.IMove;
+import ultimatetictactoe.BLL.Move.IMove;
 
 
 /**

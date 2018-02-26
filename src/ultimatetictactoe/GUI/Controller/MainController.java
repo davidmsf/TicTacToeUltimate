@@ -20,7 +20,6 @@ import javafx.scene.layout.GridPane;
  */
 public class MainController implements Initializable {
     
-    private Label label;
     @FXML
     private GridPane MacroBoard;
     @FXML
@@ -42,9 +41,9 @@ public class MainController implements Initializable {
     @FXML
     private GridPane gridPaneRightBottom;
     
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
+    private void handleButtonAction(ActionEvent event) 
+    {
+
     }
     
     @Override
