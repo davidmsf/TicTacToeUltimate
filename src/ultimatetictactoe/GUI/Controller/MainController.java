@@ -8,8 +8,10 @@ package ultimatetictactoe.GUI.Controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -22,70 +24,63 @@ public class MainController implements Initializable {
     
     @FXML
     private GridPane MacroBoard;
-    @FXML
-    private GridPane gridPaneLeftTop;
-    @FXML
-    private GridPane gridPaneMiddleLeft;
-    @FXML
-    private GridPane gridPaneLeftBottom;
-    @FXML
-    private GridPane gridPaneMiddleTop;
-    @FXML
-    private GridPane gridPaneMiddle;
-    @FXML
-    private GridPane gridPaneMiddleBottom;
-    @FXML
-    private GridPane gridPaneTopRight;
-    @FXML
-    private GridPane gridPaneMiddleRight;
-    @FXML
-    private GridPane gridPaneRightBottom;
     
-    private void handleButtonAction(ActionEvent event) 
-    {
-
-    }
+  
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        initBoard();
+              
     }    
 
     @FXML
     private void MacroBoardClick(MouseEvent event) 
     {
-        GridPane grid = null;
-        for(int i = 0;i<9;i++)
+        
+        for(int i = 0; i < 9; i++)
         {
-            if(i<=MacroBoard.getChildren().size())
+            GridPane grid = (GridPane) MacroBoard.getChildren().get(i);
+            for(Node node : grid.getChildren())
             {
-             grid = (GridPane) MacroBoard.getChildren().get(i);
+                node.setOnMouseClicked(new EventHandler<MouseEvent>(){
+                    @Override
+                    public void handle(MouseEvent event) {
+                        System.out.println(MacroBoard.getRowIndex(grid));
+                        System.out.println(MacroBoard.getColumnIndex(grid));
+                        System.out.println(grid.getRowIndex(node));
+                        System.out.println(grid.getColumnIndex(node));
+                    }
+                });
             }
             
-            
-            Label label = new Label("X");
-            grid.add(label, 1, 0);
-                 label = new Label("X");
-            grid.add(label, 1, 1);
-            label = new Label("X");
-            grid.add(label, 1, 2);
-           label = new Label("X");
-            grid.add(label, 0, 0);
-            label = new Label("X");
-            grid.add(label, 0, 1);
-            label = new Label("X");
-            grid.add(label, 0, 2);
-            label = new Label("X");
-            grid.add(label, 2, 0);
-            label = new Label("X");
-            grid.add(label, 2, 1);
-            label = new Label("X");
-            
-            grid.add(label, 2, 2);
-            
-            
-            
+        }
+    }
 
+    private void initBoard() {
+        for(int i = 0; i < 9; i++)
+        {
+            GridPane grid = (GridPane) MacroBoard.getChildren().get(i);
+
+            Label label = new Label();
+            grid.add(label, 1, 0);
+            label = new Label();
+            grid.add(label, 1, 1);
+            label = new Label();
+            grid.add(label, 1, 2);
+            label = new Label();
+            grid.add(label, 0, 0);
+            label = new Label();
+            grid.add(label, 0, 1);
+            label = new Label();
+            grid.add(label, 0, 2);
+            label = new Label();
+            grid.add(label, 2, 0);
+            label = new Label();
+            grid.add(label, 2, 1);
+            label = new Label();
+            grid.add(label, 2, 2);  
+            
+            
         }
     }
     
