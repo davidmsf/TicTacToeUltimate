@@ -34,7 +34,7 @@ public class MainController implements Initializable {
     }    
 
     @FXML
-    private void MacroBoardClick(MouseEvent event) 
+    private void macroBoardClick(MouseEvent event) 
     {
         
         for(int i = 0; i < 9; i++)
