@@ -81,11 +81,13 @@ public class MainController implements Initializable {
             
         }
     }
-    
+    // BoardSetup
     private void initBoard() {
         for(int i = 0; i < 9; i++)
         {
+            
             GridPane grid = (GridPane) macroBoard.getChildren().get(i);
+            grid.setPadding(new Insets(20, 20, i, i));
             for(int y = 0;y<3;y++)
             {
                 grid.add(new Label("X"), 0, y);
@@ -98,5 +100,4 @@ public class MainController implements Initializable {
             }
         }
     }
-    
 }
