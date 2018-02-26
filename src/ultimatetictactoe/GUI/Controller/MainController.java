@@ -49,13 +49,20 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        initBoard();    
+        initBoard();   
+        initClickEvent();
     }    
 
     @FXML
     private void macroBoardClick(MouseEvent event) 
     {
         
+ 
+    }
+
+    private void initClickEvent()
+    {
+    
         for(int i = 0; i < 9; i++)
         {
             GridPane grid = (GridPane) macroBoard.getChildren().get(i);
@@ -74,20 +81,20 @@ public class MainController implements Initializable {
             
         }
     }
-
+    
     private void initBoard() {
         for(int i = 0; i < 9; i++)
         {
             GridPane grid = (GridPane) macroBoard.getChildren().get(i);
             for(int y = 0;y<3;y++)
             {
-            grid.add(new Label("X"), 0, y);
-            grid.add(new Label("X"), 1, y);
-            grid.add(new Label("X"), 2, y);
-            
-            grid.add(new Label("X"), y, 0);
-            grid.add(new Label("X"), y, 1);
-            grid.add(new Label("X"), y, 2);
+                grid.add(new Label("X"), 0, y);
+                grid.add(new Label("X"), 1, y);
+                grid.add(new Label("X"), 2, y);
+
+                grid.add(new Label("X"), y, 0);
+                grid.add(new Label("X"), y, 1);
+                grid.add(new Label("X"), y, 2);
             }
         }
     }
