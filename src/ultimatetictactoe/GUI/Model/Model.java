@@ -5,10 +5,16 @@
  */
 package ultimatetictactoe.GUI.Model;
 
+import ultimatetictactoe.BLL.Move.IMove;
+
 /**
  *
  * @author Hussain
  */
 public class Model {
+
+    public void makeMove(IMove move) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
