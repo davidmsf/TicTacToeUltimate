@@ -5,6 +5,7 @@
  */
 package ultimatetictactoe.BLL.Game;
 
+import ultimatetictactoe.BLL.Field.FieldManager;
 import ultimatetictactoe.BLL.Field.IField;
 
 /**
@@ -13,11 +14,17 @@ import ultimatetictactoe.BLL.Field.IField;
  */
 public class GameStateManager implements IGameState
 {
+    IField iField;
+    
+    public GameStateManager()
+    {
+        iField = new FieldManager();
+    }
 
     @Override
     public IField getField() 
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return iField;
     }
 
     @Override
