@@ -93,9 +93,10 @@ public class MainController implements Initializable {
             }
             GridPane microBoard = microBoards[x / 3][y / 3];
             microBoard.getColumnConstraints().add(new ColumnConstraints(80));
-
+            
             Button button = new Button();
             GridPane.setVgrow(button, Priority.ALWAYS);
+            button.setMaxSize(40, 40);
             microBoard.add(button, x % 3, y % 3);
             buttons[i] = button;
 
