@@ -94,9 +94,7 @@ public class MainController implements Initializable {
                 grid.add(new Label("X"), 1, y);
                 grid.add(new Label("X"), 2, y);
 
-                grid.add(new Label("X"), y, 0);
-                grid.add(new Label("X"), y, 1);
-                grid.add(new Label("X"), y, 2);
+                
             }
         }
     }
