@@ -10,8 +10,11 @@ import java.util.ResourceBundle;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -88,11 +91,20 @@ public class MainController implements Initializable {
             
             GridPane grid = (GridPane) macroBoard.getChildren().get(i);
             grid.setPadding(new Insets(20, 20, i, i));
-            for(int y = 0;y<3;y++)
+            
+            for(int y = 0; y < 3; y++)
             {
-                grid.add(new Label("X"), 0, y);
-                grid.add(new Label("X"), 1, y);
-                grid.add(new Label("X"), 2, y);
+                Button label = new Button("X");
+                label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                grid.add(label, 0, y);
+                
+                label = new Button("X");
+                label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                grid.add(label, 1, y);
+               
+                label = new Button("X");
+                label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                grid.add(label, 2, y);
 
                 
             }
