@@ -27,7 +27,7 @@ public class MainController implements Initializable {
     
 
     @FXML
-    private GridPane macroBoard;
+    private GridPane microBoard;
     @FXML
     private GridPane gridPaneLeftTop;
     @FXML
@@ -70,7 +70,7 @@ public class MainController implements Initializable {
     
         for(int i = 0; i < 9; i++)
         {
-            GridPane grid = (GridPane) macroBoard.getChildren().get(i);
+            GridPane grid = (GridPane) microBoard.getChildren().get(i);
             for(Node node : grid.getChildren())
             {
                 node.setOnMouseClicked(new EventHandler<MouseEvent>(){
@@ -79,8 +79,8 @@ public class MainController implements Initializable {
                     {
                         selectedButton = (Button) node;
                         
-                        System.out.println(macroBoard.getRowIndex(grid));
-                        System.out.println(macroBoard.getColumnIndex(grid));
+                        System.out.println(GridPane.getRowIndex(grid));
+                        System.out.println(GridPane.getColumnIndex(grid));
                         System.out.println(grid.getRowIndex(node));
                         System.out.println(grid.getColumnIndex(node));
                     }
@@ -94,7 +94,7 @@ public class MainController implements Initializable {
         for(int i = 0; i < 9; i++)
         {
             
-            GridPane grid = (GridPane) macroBoard.getChildren().get(i);
+            GridPane grid = (GridPane) microBoard.getChildren().get(i);
             grid.setPadding(new Insets(20, 20, i, i));
             
             for(int y = 0; y < 3; y++)
