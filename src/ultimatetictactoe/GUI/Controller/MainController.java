@@ -47,7 +47,7 @@ public class MainController implements Initializable {
     @FXML
     private GridPane gridPaneRightBottom;
     
-    private Label selectedLabel;
+    private Button selectedButton;
     
   
     
@@ -77,7 +77,7 @@ public class MainController implements Initializable {
                     @Override
                     public void handle(MouseEvent event) 
                     {
-                        selectedLabel = (Label) node;
+                        selectedButton = (Button) node;
                         
                         
                         System.out.println(macroBoard.getRowIndex(grid));
