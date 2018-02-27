@@ -79,7 +79,6 @@ public class MainController implements Initializable {
                     {
                         selectedButton = (Button) node;
                         
-                        
                         System.out.println(macroBoard.getRowIndex(grid));
                         System.out.println(macroBoard.getColumnIndex(grid));
                         System.out.println(grid.getRowIndex(node));
@@ -100,17 +99,17 @@ public class MainController implements Initializable {
             
             for(int y = 0; y < 3; y++)
             {
-                Button label = new Button("X");
-                label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                grid.add(label, 0, y);
+                Button button = new Button("X");
+                button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                grid.add(button, 0, y);
                 
-                label = new Button("X");
-                label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                grid.add(label, 1, y);
+                button = new Button("X");
+                button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                grid.add(button, 1, y);
                
-                label = new Button("X");
-                label.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                grid.add(label, 2, y);
+                button = new Button("X");
+                button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                grid.add(button, 2, y);
 
                 
             }
