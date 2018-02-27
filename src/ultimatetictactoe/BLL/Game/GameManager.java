@@ -1,8 +1,6 @@
 package ultimatetictactoe.BLL.Game;
 
 import ultimatetictactoe.BLL.Bot.IBot;
-import ultimatetictactoe.BLL.Bot.IBot;
-import ultimatetictactoe.BLL.Move.IMove;
 import ultimatetictactoe.BLL.Move.IMove;
 
 
@@ -16,7 +14,8 @@ import ultimatetictactoe.BLL.Move.IMove;
  * that into an (re-)initialize method instead.
  * @author mjl
  */
-public class GameManager {
+public class GameManager 
+{
     
     /**
      * Three different game modes.
@@ -135,8 +134,8 @@ public class GameManager {
     
     private void UpdateBoard(IMove move)
     {
-       //TODO: Update the board to the new state 
-        throw new UnsupportedOperationException("Not supported yet."); 
+        // Hardcoded.
+        this.currentState.getField().getBoard()[move.getX()][move.getY()] = "X";
     }
     
     private void UpdateMacroboard(IMove move)
