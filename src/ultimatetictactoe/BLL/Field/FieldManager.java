@@ -36,16 +36,16 @@ public class FieldManager implements IField
     public List<IMove> getAvailableMoves() {
         List<IMove> freeCells = new ArrayList();
 
-        for(int i = 0; i < microBoard.length; i++)
+        for(int i = 0; i < macroBoard.length; i++)
         {
             
-            for(int q = 0; q < microBoard.length; q++)
+            for(int q = 0; q < macroBoard.length; q++)
             {
                             
                 int x = i;
                 int y = q;
                 
-                if(microBoard[x][y].equals(EMPTY_FIELD))
+                if(macroBoard[x][y].equals(AVAILABLE_FIELD))
                 {
                     freeCells.add(new IMove() {
                         @Override
