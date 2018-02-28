@@ -79,15 +79,19 @@ public class GameManager
     public Boolean UpdateGame(IMove move)
     {
         //Verify the new move
-        if(!VerifyMoveLegality(move)) 
-        { 
-            return false; 
-        }
+//        if(!VerifyMoveLegality(move)) 
+//        { 
+//            return false; 
+//        }
         
         //Update the currentState
-        UpdateBoard(move);
+        PrintDebugField(currentState.getField().getMacroboard());
+       
+       // UpdateBoard(move);
         UpdateMacroboard(move);
-        
+         PrintDebugField(currentState.getField().getMacroboard());
+
+       
         //Update currentPlayer
         currentPlayer = (currentPlayer + 1) % 2;
         
@@ -135,12 +139,45 @@ public class GameManager
     private void UpdateBoard(IMove move)
     {
         // Hardcoded.
-        this.currentState.getField().getBoard()[move.getX()][move.getY()] = "X";
+        int macroX = move.getX() / 3;
+        int macroY = move.getY() / 3;
+        System.out.println(macroX + "x" + "Y" + macroY);
+        this.currentState.getField().getBoard()[macroX][macroY]= xOrO();
     }
     
     private void UpdateMacroboard(IMove move)
     {
-       //TODO: Update the macroboard to the new state 
-       throw new UnsupportedOperationException("Not supported yet."); 
-    }
+        System.out.println(move.getY());
+        System.out.println(move.getX());
+      this.currentState.getField().getMacroboard()[move.getX()][move.getY()] = xOrO();
+        System.out.println(currentState.getField().getMacroboard()[move.getX()][move.getY()]);
+    } 
+    
+        private void PrintDebugField(String[][] microBoard)
+        {
+        System.out.println();
+        for (int x = 0; x < 9; x++)
+        {
+            for (int y = 0; y < 9; y++)
+            {
+                
+                System.out.print(microBoard[y][x] + " ");
+            }
+            System.out.println();
+        }
+        }
+        
+        private String xOrO()
+        {
+            String symbol;
+            if(currentPlayer == 1)
+            {
+                 symbol = "X";
+            }
+            else
+            {
+                symbol = "O";
+            }
+            return symbol;
+        }
 }

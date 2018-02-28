@@ -23,13 +23,33 @@ public class FieldManager implements IField
     {
         microBoard = new String[3][3];
         macroBoard = new String[9][9];
+        
+        
+                for(int i = 0;i<3;i++)
+        {
+            
+            for(int y = 0;y<3;y++)
+            {
+                microBoard[y][i] = EMPTY_FIELD;
+            }
+        }
+                
+                for(int x = 0;x<9;x++)
+                {
+                    for (int i = 0; i < 9; i++) {
+                        macroBoard[i][x] =AVAILABLE_FIELD;
+                    }
+                }
+//        Arrays.fill(macroBoard, AVAILABLE_FIELD);
+//        Arrays.fill(microBoard, EMPTY_FIELD);
     }
     
     @Override
     public void clearBoard() 
     {
-        Arrays.fill(macroBoard, AVAILABLE_FIELD);
-        Arrays.fill(microBoard, EMPTY_FIELD);
+
+//        Arrays.fill(macroBoard, AVAILABLE_FIELD);
+//        Arrays.fill(microBoard, EMPTY_FIELD);
     }
 
     @Override
@@ -98,7 +118,7 @@ public class FieldManager implements IField
     {
         int macroX = x / 3;
         int macroY = y / 3;
-        
+        System.out.println(macroX+"x"+macroY);
         return microBoard[macroX][macroY].equals(AVAILABLE_FIELD);
     }
 
@@ -125,5 +145,6 @@ public class FieldManager implements IField
     {
         this.macroBoard = macroBoard;
     }
+    
     
 }

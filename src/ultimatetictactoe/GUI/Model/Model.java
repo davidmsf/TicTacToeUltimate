@@ -17,12 +17,14 @@ public class Model {
 
     private GameManager gameManager;
 
-    public Model() {
+    public Model() 
+    {
         gameManager = new GameManager(new GameStateManager());
     }
     
     
-    public void makeMove(IMove move) {
+    public void makeMove(IMove move) 
+    {
         gameManager.UpdateGame(move);
     }
     

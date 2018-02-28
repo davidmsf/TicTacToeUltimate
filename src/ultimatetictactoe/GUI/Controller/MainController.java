@@ -30,8 +30,7 @@ public class MainController implements Initializable {
     @FXML
     private GridPane macroBoard;
     
-    private Button[] buttons;
-    
+   
     private GridPane[][] microBoards;
     
     private Model model;
@@ -61,7 +60,8 @@ public class MainController implements Initializable {
                     {                       
                         
                          IMove move = (IMove) ((Button) event.getSource()).getUserData();
-                         System.out.println(move.getX()+" "+move.getY());
+                         model.makeMove(move);
+                         //System.out.println(move.getX()+" "+move.getY());
                          //model.makeMove(move);
                     }
                 });
