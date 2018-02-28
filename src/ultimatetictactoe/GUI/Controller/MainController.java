@@ -75,7 +75,12 @@ public class MainController implements Initializable {
             
         }
     }
-    // BoardSetup
+    
+    
+    
+    /**
+     *  BoardSetup
+     */
     private void initBoard() {
         microBoards = new GridPane[3][3];
         buttons = new Button[81];
@@ -120,32 +125,7 @@ public class MainController implements Initializable {
                 });
                 }
         }
-        /*
-        for(int i = 0; i < 9; i++)
-        {
-            
-            GridPane grid = (GridPane) macroBoard.getChildren().get(i);
-            grid.setPadding(new Insets(20, 20, i, i));
-            Button button = new Button("X");
-            for(int y = 0; y < 3; y++)
-            {
-                
-                button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                grid.add(button, 0, y);
-                
-                button = new Button("X");
-                button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                grid.add(button, 1, y);
- 
-                button = new Button("X");
-                button.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                grid.add(button, 2, y);
 
-                
-            }
-    
-        }
-        */
     }
 
 
