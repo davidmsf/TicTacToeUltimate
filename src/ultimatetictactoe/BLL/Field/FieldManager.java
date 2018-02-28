@@ -6,7 +6,6 @@
 package ultimatetictactoe.BLL.Field;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import ultimatetictactoe.BLL.Move.IMove;
 
@@ -24,8 +23,13 @@ public class FieldManager implements IField
         microBoard = new String[3][3];
         macroBoard = new String[9][9];
         
+    }
+    
+    @Override
+    public void clearBoard() 
+    {
         
-                for(int i = 0;i<3;i++)
+        for(int i = 0;i<3;i++)
         {
             
             for(int y = 0;y<3;y++)
@@ -34,22 +38,14 @@ public class FieldManager implements IField
             }
         }
                 
-                for(int x = 0;x<9;x++)
-                {
-                    for (int i = 0; i < 9; i++) {
-                        macroBoard[i][x] =AVAILABLE_FIELD;
-                    }
-                }
-//        Arrays.fill(macroBoard, AVAILABLE_FIELD);
-//        Arrays.fill(microBoard, EMPTY_FIELD);
-    }
-    
-    @Override
-    public void clearBoard() 
-    {
-
-//        Arrays.fill(macroBoard, AVAILABLE_FIELD);
-//        Arrays.fill(microBoard, EMPTY_FIELD);
+        for(int x = 0;x<9;x++)
+        {
+            for (int i = 0; i < 9; i++) {
+                macroBoard[i][x] =AVAILABLE_FIELD;
+            }
+        }
+        //Arrays.fill(macroBoard, AVAILABLE_FIELD);
+        //Arrays.fill(microBoard, EMPTY_FIELD);
     }
 
     @Override
@@ -88,7 +84,7 @@ public class FieldManager implements IField
 
     @Override
     public String getPlayerId(int column, int row) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return macroBoard[column][row];
     }
 
     @Override
@@ -110,7 +106,7 @@ public class FieldManager implements IField
     @Override
     public boolean isFull() 
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return getAvailableMoves().isEmpty();
     }
 
     @Override
