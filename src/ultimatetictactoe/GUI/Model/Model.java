@@ -5,6 +5,8 @@
  */
 package ultimatetictactoe.GUI.Model;
 
+import ultimatetictactoe.BLL.Game.GameManager;
+import ultimatetictactoe.BLL.Game.GameStateManager;
 import ultimatetictactoe.BLL.Move.IMove;
 
 /**
@@ -13,8 +15,15 @@ import ultimatetictactoe.BLL.Move.IMove;
  */
 public class Model {
 
+    private GameManager gameManager;
+
+    public Model() {
+        gameManager = new GameManager(new GameStateManager());
+    }
+    
+    
     public void makeMove(IMove move) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        gameManager.UpdateGame(move);
     }
     
 }

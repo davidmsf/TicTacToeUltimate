@@ -5,6 +5,7 @@
  */
 package ultimatetictactoe.BLL.Field;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import ultimatetictactoe.BLL.Move.IMove;
@@ -33,7 +34,36 @@ public class FieldManager implements IField
 
     @Override
     public List<IMove> getAvailableMoves() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<IMove> freeCells = new ArrayList();
+
+        for(int i = 0; i < microBoard.length; i++)
+        {
+            
+            for(int q = 0; q < microBoard.length; q++)
+            {
+                            
+                int x = i;
+                int y = q;
+                
+                if(microBoard[x][y].equals(EMPTY_FIELD))
+                {
+                    freeCells.add(new IMove() {
+                        @Override
+                        public int getX() {
+                            return x;
+                        }
+
+                        @Override
+                        public int getY() {
+                           return y;
+                        }
+                    });
+                }
+            }
+
+        }
+
+        return freeCells;
     }
 
     @Override

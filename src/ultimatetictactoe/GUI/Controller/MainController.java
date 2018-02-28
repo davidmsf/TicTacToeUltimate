@@ -68,6 +68,7 @@ public class MainController implements Initializable {
                         
                          IMove move = (IMove) ((Button) event.getSource()).getUserData();
                          System.out.println(move.getX()+" "+move.getY());
+                         //model.makeMove(move);
                     }
                 });
             }
@@ -79,42 +80,45 @@ public class MainController implements Initializable {
         microBoards = new GridPane[3][3];
         buttons = new Button[81];
         
-        for(int i = 0; i < 81; i++)
+        for(int i = 0; i < 9; i++)
         {
-            int x = i % 9;
-            int y = i / 9;
-        
-        
-        
-        if (microBoards[x / 3][y / 3] == null)
-            {
-                microBoards[x / 3][y / 3] = new GridPane();
-                macroBoard.add(microBoards[x / 3][y / 3], x / 3, y / 3);
-            }
-            GridPane microBoard = microBoards[x / 3][y / 3];
-            microBoard.getColumnConstraints().add(new ColumnConstraints(80));
             
-            Button button = new Button();
-            GridPane.setVgrow(button, Priority.ALWAYS);
-            button.setMaxSize(40, 40);
-            microBoard.add(button, x % 3, y % 3);
-            buttons[i] = button;
-
-            button.setUserData(new IMove()
+            for(int q = 0; q < 9; q++)
             {
-                @Override
-                public int getX()
-                {
-                    return x;
-                }
-
-                @Override
-                public int getY()
-                {
-                    return y;
-                }
-            });
+                int x = i;
+                int y = q;
         
+        
+        
+                if (microBoards[x / 3][y / 3] == null)
+                    {
+                        microBoards[x / 3][y / 3] = new GridPane();
+                        macroBoard.add(microBoards[x / 3][y / 3], x / 3, y / 3);
+                    }
+                GridPane microBoard = microBoards[x / 3][y / 3];
+                microBoard.getColumnConstraints().add(new ColumnConstraints(80));
+
+                Button button = new Button();
+                GridPane.setVgrow(button, Priority.ALWAYS);
+                button.setMaxSize(40, 40);
+                microBoard.add(button, x % 3, y % 3);
+                buttons[i] = button;
+
+                button.setUserData(new IMove()
+                {
+                    @Override
+                    public int getX()
+                    {
+                        return x;
+                    }
+
+                    @Override
+                    public int getY()
+                    {
+                        return y;
+                    }
+                });
+                }
         }
         /*
         for(int i = 0; i < 9; i++)
