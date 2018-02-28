@@ -89,10 +89,10 @@ public class MainController implements Initializable {
         
         
                 if (microBoards[x / 3][y / 3] == null)
-                    {
-                        microBoards[x / 3][y / 3] = new GridPane();
-                        macroBoard.add(microBoards[x / 3][y / 3], x / 3, y / 3);
-                    }
+                {
+                    microBoards[x / 3][y / 3] = new GridPane();
+                    macroBoard.add(microBoards[x / 3][y / 3], x / 3, y / 3);
+                }
                 GridPane microBoard = microBoards[x / 3][y / 3];
                 microBoard.getColumnConstraints().add(new ColumnConstraints(80));
 
