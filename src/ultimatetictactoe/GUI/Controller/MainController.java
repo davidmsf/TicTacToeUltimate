@@ -7,21 +7,15 @@ package ultimatetictactoe.GUI.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.HPos;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
 import ultimatetictactoe.BLL.Move.IMove;
 import ultimatetictactoe.GUI.Model.Model;
 
@@ -83,7 +77,6 @@ public class MainController implements Initializable {
      */
     private void initBoard() {
         microBoards = new GridPane[3][3];
-        buttons = new Button[81];
         
         for(int i = 0; i < 9; i++)
         {
@@ -107,7 +100,6 @@ public class MainController implements Initializable {
                 GridPane.setVgrow(button, Priority.ALWAYS);
                 button.setMaxSize(40, 40);
                 microBoard.add(button, x % 3, y % 3);
-                buttons[i] = button;
 
                 button.setUserData(new IMove()
                 {
