@@ -45,7 +45,7 @@ public class FieldManager implements IField
                 int x = i;
                 int y = q;
                 
-                if(macroBoard[x][y].equals(EMPTY_FIELD))
+                if(macroBoard[x][y].equals(AVAILABLE_FIELD))
                 {
                     freeCells.add(new IMove() {
                         @Override
