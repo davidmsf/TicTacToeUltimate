@@ -23,9 +23,15 @@ public class Model {
     }
     
     
-    public void makeMove(IMove move) 
+    public boolean makeMove(IMove move) 
     {
-        gameManager.UpdateGame(move);
+       boolean validMove = gameManager.UpdateGame(move);
+       return validMove;
+    }
+
+    public String getPlayer() {
+        String player = gameManager.xOrO();
+        return player;
     }
     
 }
