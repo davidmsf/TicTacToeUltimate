@@ -200,58 +200,70 @@ public class GameManager
     private void checkMicroWinner(String player)
     {
 
-            String[][] moves = currentState.getField().getBoard();
-            String[][] microBoard = currentState.getField().getMacroboard();
-            
-            String[] check = new String[3];
-            
-            for(int x = 0; x < 9; x++)
-            {
-                for(int y = 0; y < 6; y++)
-                {
-                    if(y % 3 == 0 || y == 0)
-                    {
-                        check[0] = moves[x][y]; 
-                        check[1] = moves[x][y+1];
-                        check[2] = moves[x][y+2];
-                        
-                        if(check[0].equals(check[1]) && check[1].equals(check[2]) && check[0].equals(player))
-                        {
-                            int microX = x / 3;
-                            int microY = y / 3;
-                            System.out.println("WINNER: "+microX+" "+microY);
-                            //microBoard[microX][microY] = player;
-                        }
-                    }
+        String[][] board = currentState.getField().getBoard();
+        String[][] microBoard = currentState.getField().getMacroboard();
 
-                }
-            }
+        horizontalCheck(board, player);
+        verticalCheck(board, player);
             
-            for(int x = 0; x < 9; x++)
-            {
-                for(int y = 0; y < 6; y++)
-                {
-                    if(y % 3 == 0 || y == 0)
-                    {
-                        check[0] = moves[y][x]; 
-                        check[1] = moves[y+1][x];
-                        check[2] = moves[y+2][x];
-                        
-                        if(check[0].equals(check[1]) && check[1].equals(check[2]) && check[0].equals(player))
-                        {
-                            int microX = x / 3;
-                            int microY = y / 3;
-                            
-                            System.out.println("WINNER: "+microX+" "+microY);
-                            //microBoard[microX][microY] = player;
-                        }
-                    }
-
-                }
-            }
+      
     }        
             
-            //return microBoard;
+      
+    public void horizontalCheck(String[][] board, String player)
+    {
+        
+        for(int x = 0; x < 9; x++)
+        {
+            for(int y = 0; y < 6; y++)
+            {
+                if(y % 3 == 0 || y == 0)
+                {
+
+                    if(board[x][y].equals(board[x][y+1]) 
+                    && board[x][y+1].equals(board[x][y+2]) 
+                    && board[x][y].equals(player))
+                    {
+                        int microX = x / 3;
+                        int microY = y / 3;
+                        System.out.println("WINNER: "+microX+" "+microY);
+                        //microBoard[microX][microY] = player;
+                    }
+                }
+
+            }
+        }
+    
+    }
+    
+    
+    public void verticalCheck(String[][] board, String player)
+    {
+        for(int x = 0; x < 9; x++)
+        {
+            for(int y = 0; y < 6; y++)
+            {
+                if(y % 3 == 0 || y == 0)
+                {
+
+                    if(board[y][x].equals(board[y+1][x]) 
+                    && board[y+1][x].equals(board[y+2][x]) 
+                    && board[y][x].equals(player))
+                    {
+                        int microX = x / 3;
+                        int microY = y / 3;
+
+                        System.out.println("WINNER: "+microX+" "+microY);
+                        //microBoard[microX][microY] = player;
+                    }
+                }
+
+            }
+        }
+    }
+    
+    
+    
     public void allFieldsAvailable(IMove move)
     {
         int macroX = move.getX() % 3;
