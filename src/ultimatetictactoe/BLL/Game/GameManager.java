@@ -206,16 +206,37 @@ public class GameManager
         horizontalCheck(board, player);
         verticalCheck(board, player);
             
-      
+        for(int x = 0; x < 6; x++)
+        {
+            if(x % 3 == 0 || x == 0)
+            {
+                for(int y = 0; y < 3; y++)
+                {
+                    if(y % 3 == 0 || y == 0)
+                    {
+                        if(board[x][y].equals(board[x+1][y+1]) 
+                        && board[x+1][y+1].equals(board[x+2][y+2]) 
+                        && board[x][y].equals(player))
+                        {
+                            int microX = x / 3;
+                            int microY = y / 3;
+                            System.out.println("WINNER: "+microX+" "+microY);
+                            //microBoard[microX][microY] = player;
+                        }
+                    }
+
+                }
+            }
+        }
     }        
             
       
-    public void horizontalCheck(String[][] board, String player)
+    public void verticalCheck(String[][] board, String player)
     {
         
         for(int x = 0; x < 9; x++)
         {
-            for(int y = 0; y < 6; y++)
+            for(int y = 0; y < 7; y++)
             {
                 if(y % 3 == 0 || y == 0)
                 {
@@ -237,11 +258,11 @@ public class GameManager
     }
     
     
-    public void verticalCheck(String[][] board, String player)
+    public void horizontalCheck(String[][] board, String player)
     {
         for(int x = 0; x < 9; x++)
         {
-            for(int y = 0; y < 6; y++)
+            for(int y = 0; y < 7; y++)
             {
                 if(y % 3 == 0 || y == 0)
                 {
@@ -280,7 +301,7 @@ public class GameManager
                 {
                     if(!getMacroBoard()[macroX][macroY].equals("f"))
                     {
-                     getMacroBoard()[i][y] = "-1";
+                        getMacroBoard()[i][y] = "-1";
                     }
                 }
             }
