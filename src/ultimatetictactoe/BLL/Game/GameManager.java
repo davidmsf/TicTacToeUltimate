@@ -64,7 +64,8 @@ public class GameManager
      * @param bot The first bot to play.
      * @param bot2 The second bot to play.
      */
-    public GameManager(IGameState currentState, IBot bot, IBot bot2) {
+    public GameManager(IGameState currentState, IBot bot, IBot bot2) 
+    {
         this.currentState = currentState;
         mode = GameMode.BotVsBot;
         this.bot = bot;
