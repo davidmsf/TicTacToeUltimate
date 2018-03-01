@@ -15,7 +15,7 @@ import ultimatetictactoe.BLL.Move.IMove;
  */
 public class GameManager 
 {
-    
+  
     /**
      * Three different game modes.
      */
@@ -205,7 +205,16 @@ public class GameManager
 
         horizontalCheck(board, player);
         verticalCheck(board, player);
-            
+        diagonalCheckLeftToRight(board, player);
+        diagonalCheckRightToLeft(board, player);
+        
+    }        
+       
+    
+    
+    private void diagonalCheckLeftToRight(String[][] board, String player) 
+    {
+        
         for(int x = 0; x < 7; x++)
         {
             if(x % 3 == 0 || x == 0)
@@ -228,9 +237,39 @@ public class GameManager
                 }
             }
         }
-    }        
-            
-      
+        
+    }
+  
+    
+    
+    private void diagonalCheckRightToLeft(String[][] board, String player) 
+    {
+        for(int x = 0; x < 7; x++)
+        {
+            if(x % 3 == 0 || x == 0)
+            {
+                for(int y = 0; y < 7; y++)
+                {
+                    if(y % 3 == 0 || y == 0)
+                    {
+                        if(board[x][y+2].equals(board[x+1][y+1]) 
+                        && board[x+1][y+1].equals(board[x+2][y]) 
+                        && board[x][y+2].equals(player))
+                        {
+                            int microX = x / 3;
+                            int microY = y / 3;
+                            System.out.println("WINNER: "+microX+" "+microY);
+                            //microBoard[microX][microY] = player;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+    
+    
+    
     public void verticalCheck(String[][] board, String player)
     {
         
@@ -256,6 +295,7 @@ public class GameManager
         }
     
     }
+    
     
     
     public void horizontalCheck(String[][] board, String player)
