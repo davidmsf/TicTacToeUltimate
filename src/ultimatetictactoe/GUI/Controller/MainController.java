@@ -59,10 +59,7 @@ public class MainController implements Initializable {
                     public void handle(MouseEvent event) 
                     {                       
                         
-                         IMove move = (IMove) ((Button) event.getSource()).getUserData();
-                         model.makeMove(move);
-                         //System.out.println(move.getX()+" "+move.getY());
-                         
+                        setMove(event, node);
                     }
                 });
             }
@@ -120,6 +117,15 @@ public class MainController implements Initializable {
 
     }
 
-
+    private void setMove(MouseEvent event, Node node)
+    {
+        IMove move = (IMove) ((Button) event.getSource()).getUserData();
+        String XorO = model.getPlayer();
+        boolean validMove = model.makeMove(move);
+        if(validMove){
+            Button btn = (Button)node;
+            btn.setText(XorO);
+        }
+    }
 
 }

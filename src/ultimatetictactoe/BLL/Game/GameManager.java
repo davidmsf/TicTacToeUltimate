@@ -167,7 +167,7 @@ public class GameManager
         }
     }
 
-    private String xOrO()
+    public String xOrO()
     {
         String symbol;
         if(currentPlayer == 1)
