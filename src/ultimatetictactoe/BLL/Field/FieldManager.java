@@ -125,6 +125,7 @@ public class FieldManager implements IField
         int macroY = y / 3;
         Boolean emptyCell = microBoard[x][y].equals(EMPTY_FIELD);
         Boolean availableField = macroBoard[macroX][macroY].equals(AVAILABLE_FIELD);
+        System.out.println(macroBoard[macroX][macroY]);
 
         if(availableField)
         {

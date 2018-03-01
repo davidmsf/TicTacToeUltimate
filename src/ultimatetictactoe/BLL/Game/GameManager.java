@@ -85,14 +85,10 @@ public class GameManager
             return false; 
         }
         System.out.println("true move");
-        //Update the currentState
-        PrintDebugField(currentState.getField().getBoard());
-       
+      
         UpdateBoard(move);
         UpdateMacroboard(move);
-        PrintDebugField(currentState.getField().getBoard());
 
-       
         //Update currentPlayer
         currentPlayer = (currentPlayer + 1) % 2;
         
@@ -148,8 +144,13 @@ public class GameManager
     private void UpdateMacroboard(IMove move)
     {
         int macroX = move.getX() / 3;
-        int macroY = move.getY() / 3;
-        System.out.println("To update whether available field or not etc");
+        int macroY = move.getY() / 3;   
+        
+        int macroXX = move.getX() % 3;
+        int macroYY = move.getY() % 3;
+        this.currentState.getField().getMacroboard()[macroX][macroY] = "1";
+            
+        this.currentState.getField().getMacroboard()[macroXX][macroYY] = "-1";
     } 
     
     private void PrintDebugField(String[][] microBoard)
