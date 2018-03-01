@@ -1,5 +1,4 @@
 package ultimatetictactoe.BLL.Game;
-
 import ultimatetictactoe.BLL.Bot.IBot;
 import ultimatetictactoe.BLL.Move.IMove;
 
@@ -88,7 +87,8 @@ public class GameManager
       
         UpdateBoard(move);
         UpdateMacroboard(move);
-
+        String player = xOrO();
+        checkMicroWinner(player);
         //Update currentPlayer
         currentPlayer = (currentPlayer + 1) % 2;
         
@@ -184,5 +184,85 @@ public class GameManager
     public String[][] getMacroBoard()
     {
         return currentState.getField().getMacroboard();
+    }
+    
+    private boolean checkMacroWinner(String player)
+    {
+
+            String[][] moves = currentState.getField().getMacroboard();
+            if((moves[0][0].equals(moves[1][1]) && moves[1][1].equals(moves[2][2]) && moves[0][0].equals(player)) 
+            || (moves[0][2].equals(moves[1][1]) && moves[1][1].equals(moves[2][0]) && moves[0][2].equals(player)))
+            {
+                return true;
+            }
+
+            for(int i = 0; i < 3; i++)
+            {
+                if((moves[i][0].equals(moves[i][1]) && moves[i][1].equals(moves[i][2]) && moves[i][0].equals(player)) 
+                || (moves[0][i].equals(moves[1][i]) && moves[1][i].equals(moves[2][i]) && moves[0][i].equals(player)))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+
+    }
+    
+    private void checkMicroWinner(String player)
+    {
+
+            String[][] moves = currentState.getField().getBoard();
+            String[][] microBoard = currentState.getField().getMacroboard();
+            
+            String[] check = new String[3];
+            
+            for(int x = 0; x < 9; x++)
+            {
+                for(int y = 0; y < 6; y++)
+                {
+                    if(y % 3 == 0 || y == 0)
+                    {
+                        check[0] = moves[x][y]; 
+                        check[1] = moves[x][y+1];
+                        check[2] = moves[x][y+2];
+                        
+                        if(check[0].equals(check[1]) && check[1].equals(check[2]) && check[0].equals(player))
+                        {
+                            int microX = x / 3;
+                            int microY = y / 3;
+                            System.out.println("WINNER: "+microX+" "+microY);
+                            //microBoard[microX][microY] = player;
+                        }
+                    }
+
+                }
+            }
+            
+            for(int x = 0; x < 9; x++)
+            {
+                for(int y = 0; y < 6; y++)
+                {
+                    if(y % 3 == 0 || y == 0)
+                    {
+                        check[0] = moves[y][x]; 
+                        check[1] = moves[y+1][x];
+                        check[2] = moves[y+2][x];
+                        
+                        if(check[0].equals(check[1]) && check[1].equals(check[2]) && check[0].equals(player))
+                        {
+                            int microX = x / 3;
+                            int microY = y / 3;
+                            
+                            System.out.println("WINNER: "+microX+" "+microY);
+                            //microBoard[microX][microY] = player;
+                        }
+                    }
+
+                }
+            }
+            
+            
+            //return microBoard;
     }
 }

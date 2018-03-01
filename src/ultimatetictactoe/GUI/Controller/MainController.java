@@ -84,8 +84,6 @@ public class MainController implements Initializable {
                 int x = i;
                 int y = q;
         
-        
-        
                 if (microBoards[x / 3][y / 3] == null)
                 {
                     microBoards[x / 3][y / 3] = new GridPane();
@@ -126,8 +124,9 @@ public class MainController implements Initializable {
         if(validMove){
             Button btn = (Button)node;
             btn.setText(XorO);
+            getAvailableMacroBoards();
         }
-        getAvailableMacroBoards();
+        
     }
 
     private void getAvailableMacroBoards() {
