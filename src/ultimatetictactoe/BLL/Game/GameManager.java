@@ -87,8 +87,12 @@ public class GameManager
       
         UpdateBoard(move);
         UpdateMacroboard(move);
+
         String player = xOrO();
         checkMicroWinner(player);
+
+        allFieldsAvailable(move);
+
         //Update currentPlayer
         currentPlayer = (currentPlayer + 1) % 2;
         
@@ -134,10 +138,7 @@ public class GameManager
     }
     
     private void UpdateBoard(IMove move)
-    {
-        // Hardcoded.
-
-        System.out.println(move.getX() + "x" + "Y" + move.getY());
+    {     
         this.currentState.getField().getBoard()[move.getX()][move.getY()]= xOrO();
     }
     
@@ -153,20 +154,6 @@ public class GameManager
         this.currentState.getField().getMacroboard()[macroXX][macroYY] = "-1";
     } 
     
-    private void PrintDebugField(String[][] microBoard)
-    {
-        System.out.println();
-        for (int x = 0; x < 9; x++)
-        {
-            for (int y = 0; y < 9; y++)
-            {
-
-                System.out.print(microBoard[y][x] + " ");
-            }
-            System.out.println();
-        }
-    }
-
     public String xOrO()
     {
         String symbol;
@@ -186,6 +173,7 @@ public class GameManager
         return currentState.getField().getMacroboard();
     }
     
+
     private boolean checkMacroWinner(String player)
     {
 
@@ -261,8 +249,30 @@ public class GameManager
 
                 }
             }
-            
+    }        
             
             //return microBoard;
+    public void allFieldsAvailable(IMove move)
+    {
+        int macroX = move.getX() % 3;
+        int macroY = move.getY() % 3;
+        int notEmpty = 0;
+        
+        
+        
+        if(getMacroBoard()[macroX][macroY].equals("f"))
+        {
+            for(int i = 0;i<3;i++)
+            {
+                for(int y = 0;y<3;y++)
+                {
+                    if(!getMacroBoard()[macroX][macroY].equals("f"))
+                    {
+                     getMacroBoard()[i][y] = "-1";
+                    }
+                }
+            }
+        }
+
     }
 }

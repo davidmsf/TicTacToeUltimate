@@ -58,8 +58,9 @@ public class MainController implements Initializable {
                 node.setOnMouseClicked(new EventHandler<MouseEvent>(){
                     @Override
                     public void handle(MouseEvent event) 
-                    {                       
-                        
+                    {         
+                        System.out.println(GridPane.getColumnIndex(node) + "NODE");
+                        System.out.println(GridPane.getRowIndex(node) + "NODE");
                         setMove(event, node);
                     }
                 });
@@ -83,7 +84,8 @@ public class MainController implements Initializable {
             {
                 int x = i;
                 int y = q;
-        
+
+                
                 if (microBoards[x / 3][y / 3] == null)
                 {
                     microBoards[x / 3][y / 3] = new GridPane();
@@ -136,7 +138,6 @@ public class MainController implements Initializable {
         {
             for(int y = 0; y < 3; y++)
             {
-                System.out.println(availableMacroBoard[x][y]);
                 
                     for(Node node : microBoards[x][y].getChildren())
                     {  
