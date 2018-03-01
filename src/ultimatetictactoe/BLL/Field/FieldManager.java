@@ -18,6 +18,8 @@ public class FieldManager implements IField
     String[][] macroBoard;
     String[][] microBoard;
     
+    final String not_Available_Field = "1";
+    
     public FieldManager()
     {
         macroBoard = new String[3][3];
@@ -29,24 +31,24 @@ public class FieldManager implements IField
     @Override
     public void clearBoard() 
     {
+       for(int i = 0;i<3;i++)
+       {
+           for(int y = 0;y<3;y++)
+           {
+               macroBoard[i][y] = not_Available_Field;
+             
+           }
+       }
+        macroBoard[1][1] = AVAILABLE_FIELD;
         
-        for(int i = 0;i<3;i++)
-        {
-            
-            for(int y = 0;y<3;y++)
-            {
-                macroBoard[y][i] = EMPTY_FIELD;
-            }
-        }
-              
         for(int x = 0;x<9;x++)
         {
-            for (int i = 0; i < 9; i++) {
-                microBoard[i][x] = AVAILABLE_FIELD;
+            for (int i = 0; i < 9; i++) 
+            {
+                microBoard[x][i] = EMPTY_FIELD;
+                
             }
         }
-        //Arrays.fill(microBoard, AVAILABLE_FIELD);
-        //Arrays.fill(macroBoard, EMPTY_FIELD);
     }
 
     @Override
@@ -110,14 +112,28 @@ public class FieldManager implements IField
     {
         return getAvailableMoves().isEmpty();
     }
-
+    /**
+     * Checks if it is in active microboard, and if the cell is empty.
+     * @param x
+     * @param y
+     * @return 
+     */
     @Override
     public Boolean isInActiveMicroboard(int x, int y) 
     {
-       int macroX = x / 3;
-       int macroY = y / 3;
-        
-        return microBoard[x][y].equals(AVAILABLE_FIELD);
+        int macroX = x / 3;
+        int macroY = y / 3;
+        Boolean emptyCell = microBoard[x][y].equals(EMPTY_FIELD);
+        Boolean availableField = macroBoard[macroX][macroY].equals(AVAILABLE_FIELD);
+
+        if(availableField)
+        {
+            if(emptyCell)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
