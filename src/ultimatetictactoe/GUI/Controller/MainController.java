@@ -40,7 +40,8 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) 
     {
         model = new Model();
-        initBoard();   
+        initBoard(); 
+        getAvailableMicroBoards();
         initClickEvent();
     }    
 
@@ -125,6 +126,25 @@ public class MainController implements Initializable {
         if(validMove){
             Button btn = (Button)node;
             btn.setText(XorO);
+        }
+    }
+
+    private void getAvailableMicroBoards() {
+        String[][] availableMicroBoard = model.getAvailableMicroBoards();
+        
+        for(int x = 0; x < 3; x++)
+        {
+            for(int y = 0; y < 3; y++)
+            {
+                if(availableMicroBoard[x][y].equals("1"))
+                {
+                    for(Node node : microBoards[x][y].getChildren())
+                    {
+                        Button btn = (Button) node;
+                        btn.setDisable(true);
+                    }
+                }
+            }
         }
     }
 

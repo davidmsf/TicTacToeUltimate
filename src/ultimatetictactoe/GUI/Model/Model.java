@@ -5,6 +5,7 @@
  */
 package ultimatetictactoe.GUI.Model;
 
+import javafx.scene.layout.GridPane;
 import ultimatetictactoe.BLL.Game.GameManager;
 import ultimatetictactoe.BLL.Game.GameStateManager;
 import ultimatetictactoe.BLL.Move.IMove;
@@ -32,6 +33,11 @@ public class Model {
     public String getPlayer() {
         String player = gameManager.xOrO();
         return player;
+    }
+
+    public String[][] getAvailableMicroBoards() {
+        String[][] getAvailableMicroBoard = gameManager.getBoard();
+        return getAvailableMicroBoard;
     }
     
 }

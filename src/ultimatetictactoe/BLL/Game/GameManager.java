@@ -178,4 +178,9 @@ public class GameManager
         }
         return symbol;
     }
+    
+    public String[][] getBoard()
+    {
+        return currentState.getField().getBoard();
+    }
 }
