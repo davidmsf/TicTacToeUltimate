@@ -88,6 +88,7 @@ public class GameManager
       
         UpdateBoard(move);
         UpdateMacroboard(move);
+        allFieldsAvailable(move);
 
         //Update currentPlayer
         currentPlayer = (currentPlayer + 1) % 2;
@@ -134,7 +135,7 @@ public class GameManager
     }
     
     private void UpdateBoard(IMove move)
-    {
+    {     
         this.currentState.getField().getBoard()[move.getX()][move.getY()]= xOrO();
     }
     
@@ -167,5 +168,28 @@ public class GameManager
     public String[][] getMacroBoard()
     {
         return currentState.getField().getMacroboard();
+    }
+    
+    public void allFieldsAvailable(IMove move)
+    {
+        int macroX = move.getX() % 3;
+        int macroY = move.getY() % 3;
+        int notEmpty = 0;
+        
+        
+        
+        if(getMacroBoard()[macroX][macroY].equals("f"))
+        {
+            for(int i = 0;i<3;i++)
+            {
+                for(int y = 0;y<3;y++)
+                {
+                    if(!getMacroBoard()[macroX][macroY].equals("f"))
+                    {
+                     getMacroBoard()[i][y] = "-1";
+                    }
+                }
+            }
+        }
     }
 }
