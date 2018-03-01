@@ -85,11 +85,11 @@ public class GameManager
         }
         System.out.println("true move");
         //Update the currentState
-        PrintDebugField(currentState.getField().getMacroboard());
+        PrintDebugField(currentState.getField().getBoard());
        
         UpdateBoard(move);
         UpdateMacroboard(move);
-        PrintDebugField(currentState.getField().getMacroboard());
+        PrintDebugField(currentState.getField().getBoard());
 
        
         //Update currentPlayer
@@ -139,21 +139,19 @@ public class GameManager
     private void UpdateBoard(IMove move)
     {
         // Hardcoded.
-        int macroX = move.getX() / 3;
-        int macroY = move.getY() / 3;
-        System.out.println(macroX + "x" + "Y" + macroY);
-        this.currentState.getField().getBoard()[macroX][macroY]= xOrO();
+
+        System.out.println(move.getX() + "x" + "Y" + move.getY());
+        this.currentState.getField().getBoard()[move.getX()][move.getY()]= xOrO();
     }
     
     private void UpdateMacroboard(IMove move)
     {
-        System.out.println(move.getY());
-        System.out.println(move.getX());
-        this.currentState.getField().getMacroboard()[move.getX()][move.getY()] = xOrO();
-        System.out.println(currentState.getField().getMacroboard()[move.getX()][move.getY()]);
+        int macroX = move.getX() / 3;
+        int macroY = move.getY() / 3;
+        System.out.println("To update whether available field or not etc");
     } 
     
-    private void PrintDebugField(String[][] macroBoard)
+    private void PrintDebugField(String[][] microBoard)
     {
         System.out.println();
         for (int x = 0; x < 9; x++)
@@ -161,7 +159,7 @@ public class GameManager
             for (int y = 0; y < 9; y++)
             {
 
-                System.out.print(macroBoard[y][x] + " ");
+                System.out.print(microBoard[y][x] + " ");
             }
             System.out.println();
         }

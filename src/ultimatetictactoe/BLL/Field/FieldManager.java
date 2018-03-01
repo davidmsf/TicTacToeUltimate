@@ -15,13 +15,14 @@ import ultimatetictactoe.BLL.Move.IMove;
  */
 public class FieldManager implements IField
 {
-    String microBoard[][];
-    String macroBoard[][];
+    String[][] macroBoard;
+    String[][] microBoard;
     
     public FieldManager()
     {
-        microBoard = new String[3][3];
-        macroBoard = new String[9][9];
+        macroBoard = new String[3][3];
+        
+        microBoard = new String[9][9];
         clearBoard();
     }
     
@@ -34,18 +35,18 @@ public class FieldManager implements IField
             
             for(int y = 0;y<3;y++)
             {
-                microBoard[y][i] = EMPTY_FIELD;
+                macroBoard[y][i] = EMPTY_FIELD;
             }
         }
               
         for(int x = 0;x<9;x++)
         {
             for (int i = 0; i < 9; i++) {
-                macroBoard[i][x] = AVAILABLE_FIELD;
+                microBoard[i][x] = AVAILABLE_FIELD;
             }
         }
-        //Arrays.fill(macroBoard, AVAILABLE_FIELD);
-        //Arrays.fill(microBoard, EMPTY_FIELD);
+        //Arrays.fill(microBoard, AVAILABLE_FIELD);
+        //Arrays.fill(macroBoard, EMPTY_FIELD);
     }
 
     @Override
@@ -83,8 +84,9 @@ public class FieldManager implements IField
     }
 
     @Override
-    public String getPlayerId(int column, int row) {
-        return macroBoard[column][row];
+    public String getPlayerId(int column, int row) 
+    {
+        return microBoard[column][row];
     }
 
     @Override
@@ -112,10 +114,10 @@ public class FieldManager implements IField
     @Override
     public Boolean isInActiveMicroboard(int x, int y) 
     {
-       // int macroX = x / 3;
-        //int macroY = y / 3;
+       int macroX = x / 3;
+       int macroY = y / 3;
         
-        return macroBoard[x][y].equals(AVAILABLE_FIELD);
+        return microBoard[x][y].equals(AVAILABLE_FIELD);
     }
 
     @Override
@@ -139,8 +141,7 @@ public class FieldManager implements IField
     @Override
     public void setMacroboard(String[][] macroboard) 
     {
-        this.macroBoard = macroBoard;
+        this.macroBoard = microBoard;
     }
-    
     
 }
