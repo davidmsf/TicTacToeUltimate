@@ -62,7 +62,7 @@ public class MainController implements Initializable {
                          IMove move = (IMove) ((Button) event.getSource()).getUserData();
                          model.makeMove(move);
                          //System.out.println(move.getX()+" "+move.getY());
-                         //model.makeMove(move);
+                         
                     }
                 });
             }

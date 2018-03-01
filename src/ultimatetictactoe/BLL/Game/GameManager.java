@@ -79,17 +79,17 @@ public class GameManager
     public Boolean UpdateGame(IMove move)
     {
         //Verify the new move
-//        if(!VerifyMoveLegality(move)) 
-//        { 
-//            return false; 
-//        }
-        
+        if(!VerifyMoveLegality(move)) 
+        {   System.out.println("false");
+            return false; 
+        }
+        System.out.println("true move");
         //Update the currentState
         PrintDebugField(currentState.getField().getMacroboard());
        
-       // UpdateBoard(move);
+        UpdateBoard(move);
         UpdateMacroboard(move);
-         PrintDebugField(currentState.getField().getMacroboard());
+        PrintDebugField(currentState.getField().getMacroboard());
 
        
         //Update currentPlayer
@@ -149,35 +149,35 @@ public class GameManager
     {
         System.out.println(move.getY());
         System.out.println(move.getX());
-      this.currentState.getField().getMacroboard()[move.getX()][move.getY()] = xOrO();
+        this.currentState.getField().getMacroboard()[move.getX()][move.getY()] = xOrO();
         System.out.println(currentState.getField().getMacroboard()[move.getX()][move.getY()]);
     } 
     
-        private void PrintDebugField(String[][] microBoard)
-        {
+    private void PrintDebugField(String[][] macroBoard)
+    {
         System.out.println();
         for (int x = 0; x < 9; x++)
         {
             for (int y = 0; y < 9; y++)
             {
-                
-                System.out.print(microBoard[y][x] + " ");
+
+                System.out.print(macroBoard[y][x] + " ");
             }
             System.out.println();
         }
-        }
-        
-        private String xOrO()
+    }
+
+    private String xOrO()
+    {
+        String symbol;
+        if(currentPlayer == 1)
         {
-            String symbol;
-            if(currentPlayer == 1)
-            {
-                 symbol = "X";
-            }
-            else
-            {
-                symbol = "O";
-            }
-            return symbol;
+             symbol = "X";
         }
+        else
+        {
+            symbol = "O";
+        }
+        return symbol;
+    }
 }

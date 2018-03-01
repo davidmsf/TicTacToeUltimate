@@ -22,7 +22,7 @@ public class FieldManager implements IField
     {
         microBoard = new String[3][3];
         macroBoard = new String[9][9];
-        
+        clearBoard();
     }
     
     @Override
@@ -37,11 +37,11 @@ public class FieldManager implements IField
                 microBoard[y][i] = EMPTY_FIELD;
             }
         }
-                
+              
         for(int x = 0;x<9;x++)
         {
             for (int i = 0; i < 9; i++) {
-                macroBoard[i][x] =AVAILABLE_FIELD;
+                macroBoard[i][x] = AVAILABLE_FIELD;
             }
         }
         //Arrays.fill(macroBoard, AVAILABLE_FIELD);
@@ -52,16 +52,16 @@ public class FieldManager implements IField
     public List<IMove> getAvailableMoves() {
         List<IMove> freeCells = new ArrayList();
 
-        for(int i = 0; i < macroBoard.length; i++)
+        for(int i = 0; i < microBoard.length; i++)
         {
             
-            for(int q = 0; q < macroBoard.length; q++)
+            for(int q = 0; q < microBoard.length; q++)
             {
                             
                 int x = i;
                 int y = q;
                 
-                if(macroBoard[x][y].equals(AVAILABLE_FIELD))
+                if(microBoard[x][y].equals(EMPTY_FIELD))
                 {
                     freeCells.add(new IMove() {
                         @Override
@@ -112,10 +112,10 @@ public class FieldManager implements IField
     @Override
     public Boolean isInActiveMicroboard(int x, int y) 
     {
-        int macroX = x / 3;
-        int macroY = y / 3;
-        System.out.println(macroX+"x"+macroY);
-        return microBoard[macroX][macroY].equals(AVAILABLE_FIELD);
+       // int macroX = x / 3;
+        //int macroY = y / 3;
+        
+        return macroBoard[x][y].equals(AVAILABLE_FIELD);
     }
 
     @Override
