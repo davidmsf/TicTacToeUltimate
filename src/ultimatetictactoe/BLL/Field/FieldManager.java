@@ -161,4 +161,5 @@ public class FieldManager implements IField
         this.macroBoard = microBoard;
     }
     
+    
 }
