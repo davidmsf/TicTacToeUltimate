@@ -135,9 +135,6 @@ public class GameManager
     
     private void UpdateBoard(IMove move)
     {
-        // Hardcoded.
-
-        System.out.println(move.getX() + "x" + "Y" + move.getY());
         this.currentState.getField().getBoard()[move.getX()][move.getY()]= xOrO();
     }
     
@@ -153,20 +150,6 @@ public class GameManager
         this.currentState.getField().getMacroboard()[macroXX][macroYY] = "-1";
     } 
     
-    private void PrintDebugField(String[][] microBoard)
-    {
-        System.out.println();
-        for (int x = 0; x < 9; x++)
-        {
-            for (int y = 0; y < 9; y++)
-            {
-
-                System.out.print(microBoard[y][x] + " ");
-            }
-            System.out.println();
-        }
-    }
-
     public String xOrO()
     {
         String symbol;
