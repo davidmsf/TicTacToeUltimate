@@ -80,7 +80,7 @@ public class GameManager
     {
         //Verify the new move
         if(!VerifyMoveLegality(move)) 
-        {   System.out.println("false");
+        {   System.out.println("false move");
             return false; 
         }
         System.out.println("true move");
