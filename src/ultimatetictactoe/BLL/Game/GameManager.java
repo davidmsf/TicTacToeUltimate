@@ -164,8 +164,8 @@ public class GameManager
         return symbol;
     }
     
-    public String[][] getBoard()
+    public String[][] getMacroBoard()
     {
-        return currentState.getField().getBoard();
+        return currentState.getField().getMacroboard();
     }
 }

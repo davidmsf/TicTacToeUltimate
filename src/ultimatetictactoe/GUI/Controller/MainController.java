@@ -41,7 +41,7 @@ public class MainController implements Initializable {
     {
         model = new Model();
         initBoard(); 
-        getAvailableMicroBoards();
+        getAvailableMacroBoards();
         initClickEvent();
     }    
 
@@ -127,23 +127,32 @@ public class MainController implements Initializable {
             Button btn = (Button)node;
             btn.setText(XorO);
         }
+        getAvailableMacroBoards();
     }
 
-    private void getAvailableMicroBoards() {
-        String[][] availableMicroBoard = model.getAvailableMicroBoards();
+    private void getAvailableMacroBoards() {
+        String[][] availableMacroBoard = model.getAvailableMacroBoards();
         
         for(int x = 0; x < 3; x++)
         {
             for(int y = 0; y < 3; y++)
             {
-                if(availableMicroBoard[x][y].equals("1"))
-                {
+                System.out.println(availableMacroBoard[x][y]);
+                
                     for(Node node : microBoards[x][y].getChildren())
-                    {
-                        Button btn = (Button) node;
-                        btn.setDisable(true);
+                    {  
+                        if(!availableMacroBoard[x][y].equals("-1"))
+                        {
+                            Button btn = (Button) node;
+                            btn.setDisable(true);
+                        }
+                        else
+                        {
+                            Button btn = (Button) node;
+                            btn.setDisable(false);
+                        }
                     }
-                }
+                
             }
         }
     }

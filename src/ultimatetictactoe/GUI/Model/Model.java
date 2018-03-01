@@ -35,8 +35,8 @@ public class Model {
         return player;
     }
 
-    public String[][] getAvailableMicroBoards() {
-        String[][] getAvailableMicroBoard = gameManager.getBoard();
+    public String[][] getAvailableMacroBoards() {
+        String[][] getAvailableMicroBoard = gameManager.getMacroBoard();
         return getAvailableMicroBoard;
     }
     
