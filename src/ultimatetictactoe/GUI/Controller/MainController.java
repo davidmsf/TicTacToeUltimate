@@ -127,6 +127,7 @@ public class MainController implements Initializable {
             Button btn = (Button)node;
             btn.setText(XorO);
         }
+        getAvailableMicroBoards();
     }
 
     private void getAvailableMicroBoards() {
@@ -136,7 +137,7 @@ public class MainController implements Initializable {
         {
             for(int y = 0; y < 3; y++)
             {
-                if(availableMicroBoard[x][y].equals("1"))
+                if(!availableMicroBoard[x][y].equals("-1"))
                 {
                     for(Node node : microBoards[x][y].getChildren())
                     {
