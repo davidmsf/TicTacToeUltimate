@@ -206,11 +206,11 @@ public class GameManager
         horizontalCheck(board, player);
         verticalCheck(board, player);
             
-        for(int x = 0; x < 6; x++)
+        for(int x = 0; x < 7; x++)
         {
             if(x % 3 == 0 || x == 0)
             {
-                for(int y = 0; y < 3; y++)
+                for(int y = 0; y < 7; y++)
                 {
                     if(y % 3 == 0 || y == 0)
                     {
