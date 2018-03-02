@@ -89,9 +89,15 @@ public class GameManager
         UpdateMacroboard(move);
         allFieldsAvailable(move);
 
-        String player = xOrO();
-        checkMicroWinner(player);
+        checkMicroWinner();
 
+        
+        checkMicroWinner();
+        //checkMacroWinner();
+        
+        checkTakenFields(move.getX(), move.getY());
+        
+        allFieldsAvailable(move);
 
         //Update currentPlayer
         currentPlayer = (currentPlayer + 1) % 2;
@@ -197,12 +203,12 @@ public class GameManager
 
     }
     
-    private void checkMicroWinner(String player)
+    public void checkMicroWinner()
     {
 
         String[][] board = currentState.getField().getBoard();
-        String[][] microBoard = currentState.getField().getMacroboard();
-
+        String player = xOrO();
+                
         horizontalCheck(board, player);
         verticalCheck(board, player);
         diagonalCheckLeftToRight(board, player);
@@ -227,10 +233,9 @@ public class GameManager
                         && board[x+1][y+1].equals(board[x+2][y+2]) 
                         && board[x][y].equals(player))
                         {
-                            int microX = x / 3;
-                            int microY = y / 3;
-                            System.out.println("WINNER: "+microX+" "+microY);
-                            //microBoard[microX][microY] = player;
+                            int macroX = x / 3;
+                            int macroY = y / 3;
+                            getMacroBoard()[macroX][macroY] = player;
                         }
                     }
 
@@ -256,10 +261,9 @@ public class GameManager
                         && board[x+1][y+1].equals(board[x+2][y]) 
                         && board[x][y+2].equals(player))
                         {
-                            int microX = x / 3;
-                            int microY = y / 3;
-                            System.out.println("WINNER: "+microX+" "+microY);
-                            //microBoard[microX][microY] = player;
+                            int macroX = x / 3;
+                            int macroY = y / 3;
+                            getMacroBoard()[macroX][macroY] = player;
                         }
                     }
 
@@ -270,7 +274,7 @@ public class GameManager
     
     
     
-    public void verticalCheck(String[][] board, String player)
+    private void verticalCheck(String[][] board, String player)
     {
         
         for(int x = 0; x < 9; x++)
@@ -284,10 +288,9 @@ public class GameManager
                     && board[x][y+1].equals(board[x][y+2]) 
                     && board[x][y].equals(player))
                     {
-                        int microX = x / 3;
-                        int microY = y / 3;
-                        System.out.println("WINNER: "+microX+" "+microY);
-                        //microBoard[microX][microY] = player;
+                        int macroX = x / 3;
+                        int macroY = y / 3;
+                        getMacroBoard()[macroX][macroY] = player;
                     }
                 }
 
@@ -298,7 +301,7 @@ public class GameManager
     
     
     
-    public void horizontalCheck(String[][] board, String player)
+    private void horizontalCheck(String[][] board, String player)
     {
         for(int x = 0; x < 9; x++)
         {
@@ -311,11 +314,10 @@ public class GameManager
                     && board[y+1][x].equals(board[y+2][x]) 
                     && board[y][x].equals(player))
                     {
-                        int microX = x / 3;
-                        int microY = y / 3;
 
-                        System.out.println("WINNER: "+microX+" "+microY);
-                        //microBoard[microX][microY] = player;
+                        int macroX = x / 3;
+                        int macroY = y / 3;
+                        getMacroBoard()[macroX][macroY] = player;
                     }
                 }
 
@@ -355,6 +357,52 @@ public class GameManager
                 }
             }
         }
+
+    private void checkTakenFields(int macroX, int macroY)
+    {
         
+        String[][] board = currentState.getField().getBoard();
+ 
+        int posX = macroX %3;
+        int posY = macroY %3;
+        
+        int indexX = 0;
+        for(int x = 0; x < 7; x++)
+        {
+            
+            if(x % 3 == 0 || x == 0) 
+            {
+                int indexY = 0;
+                for(int y = 0; y < 7; y++)
+                {
+                    
+                    if(y % 3 == 0 || y == 0)
+                    {
+                        if(posX == indexX && posY == indexY)
+                        {
+                            checkIfMacroCellIsEmpty(board, y, x);
+                        }
+                        
+                        indexY++;
+                    }  
+                    
+                }
+
+                indexX++;
+            }
+        }
     }
 
+    private void checkIfMacroCellIsEmpty(String[][] board, int y, int x) {
+        for(int i = 0; i < 3; i++)
+        {
+            for(int q = 0; q < 3; q++)
+            {
+                
+                System.out.print(board[y+q][x+i]);
+                
+            }
+        }
+    }
+
+}

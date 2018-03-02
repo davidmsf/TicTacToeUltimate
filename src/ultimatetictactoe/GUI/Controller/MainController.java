@@ -133,14 +133,15 @@ public class MainController implements Initializable {
 
     private void getAvailableMacroBoards() {
         String[][] availableMacroBoard = model.getAvailableMacroBoards();
-        
+    
         for(int x = 0; x < 3; x++)
         {
             for(int y = 0; y < 3; y++)
             {
-                
+                    System.out.println(availableMacroBoard[x][y]);
                     for(Node node : microBoards[x][y].getChildren())
                     {  
+                        
                         if(!availableMacroBoard[x][y].equals("-1"))
                         {
                             Button btn = (Button) node;
@@ -151,6 +152,18 @@ public class MainController implements Initializable {
                             Button btn = (Button) node;
                             btn.setDisable(false);
                         }
+                        
+                        if(availableMacroBoard[x][y].equals("X") )
+                        {
+                            Button btn = (Button) node;
+                            btn.setStyle("-fx-background-color: green");
+                        }
+                        else if(availableMacroBoard[x][y].equals("O"))
+                        {
+                            Button btn = (Button) node;
+                            btn.setStyle("-fx-background-color: blue");
+                        }
+                        
                     }
                 
             }
