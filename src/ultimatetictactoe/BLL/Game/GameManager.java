@@ -87,10 +87,9 @@ public class GameManager
       
         UpdateBoard(move);
         UpdateMacroboard(move);
-
-        String player = xOrO();
-        checkMicroWinner(player);
-
+        
+        checkMicroWinner();
+        
         allFieldsAvailable(move);
 
         //Update currentPlayer
@@ -197,12 +196,12 @@ public class GameManager
 
     }
     
-    private void checkMicroWinner(String player)
+    public void checkMicroWinner()
     {
 
         String[][] board = currentState.getField().getBoard();
-        String[][] microBoard = currentState.getField().getMacroboard();
-
+        String player = xOrO();
+                
         horizontalCheck(board, player);
         verticalCheck(board, player);
         diagonalCheckLeftToRight(board, player);
@@ -227,10 +226,9 @@ public class GameManager
                         && board[x+1][y+1].equals(board[x+2][y+2]) 
                         && board[x][y].equals(player))
                         {
-                            int microX = x / 3;
-                            int microY = y / 3;
-                            System.out.println("WINNER: "+microX+" "+microY);
-                            //microBoard[microX][microY] = player;
+                            int macroX = x / 3;
+                            int macroY = y / 3;
+                            getMacroBoard()[macroX][macroY] = player;
                         }
                     }
 
@@ -256,10 +254,9 @@ public class GameManager
                         && board[x+1][y+1].equals(board[x+2][y]) 
                         && board[x][y+2].equals(player))
                         {
-                            int microX = x / 3;
-                            int microY = y / 3;
-                            System.out.println("WINNER: "+microX+" "+microY);
-                            //microBoard[microX][microY] = player;
+                            int macroX = x / 3;
+                            int macroY = y / 3;
+                            getMacroBoard()[macroX][macroY] = player;
                         }
                     }
 
@@ -270,7 +267,7 @@ public class GameManager
     
     
     
-    public void verticalCheck(String[][] board, String player)
+    private void verticalCheck(String[][] board, String player)
     {
         
         for(int x = 0; x < 9; x++)
@@ -284,10 +281,9 @@ public class GameManager
                     && board[x][y+1].equals(board[x][y+2]) 
                     && board[x][y].equals(player))
                     {
-                        int microX = x / 3;
-                        int microY = y / 3;
-                        System.out.println("WINNER: "+microX+" "+microY);
-                        //microBoard[microX][microY] = player;
+                        int macroX = x / 3;
+                        int macroY = y / 3;
+                        getMacroBoard()[macroX][macroY] = player;
                     }
                 }
 
@@ -298,7 +294,7 @@ public class GameManager
     
     
     
-    public void horizontalCheck(String[][] board, String player)
+    private void horizontalCheck(String[][] board, String player)
     {
         for(int x = 0; x < 9; x++)
         {
@@ -311,11 +307,10 @@ public class GameManager
                     && board[y+1][x].equals(board[y+2][x]) 
                     && board[y][x].equals(player))
                     {
-                        int microX = x / 3;
-                        int microY = y / 3;
 
-                        System.out.println("WINNER: "+microX+" "+microY);
-                        //microBoard[microX][microY] = player;
+                        int macroX = x / 3;
+                        int macroY = y / 3;
+                        getMacroBoard()[macroX][macroY] = player;
                     }
                 }
 

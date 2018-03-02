@@ -39,5 +39,7 @@ public class Model {
         String[][] getAvailableMicroBoard = gameManager.getMacroBoard();
         return getAvailableMicroBoard;
     }
+
+
     
 }
