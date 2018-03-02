@@ -87,11 +87,11 @@ public class GameManager
       
         UpdateBoard(move);
         UpdateMacroboard(move);
+        allFieldsAvailable(move);
 
         String player = xOrO();
         checkMicroWinner(player);
 
-        allFieldsAvailable(move);
 
         //Update currentPlayer
         currentPlayer = (currentPlayer + 1) % 2;
@@ -327,25 +327,34 @@ public class GameManager
     
     public void allFieldsAvailable(IMove move)
     {
-        int macroX = move.getX() % 3;
-        int macroY = move.getY() % 3;
-        int notEmpty = 0;
+        int localX = move.getX() % 3;
+        int localY = move.getY() % 3;
         
+        int integerI = 0;
+        int integerY = 0;
         
-        
-        if(getMacroBoard()[macroX][macroY].equals("f"))
+        if(localX != 0)
         {
-            for(int i = 0;i<3;i++)
+            integerI = localX*3;
+        }
+        if(localY != 0)
+        {
+            integerY = localY*3;
+        }
+
+            for(int i = integerI;i<3+integerI;i++)
             {
-                for(int y = 0;y<3;y++)
+                for(int y = integerY;y<3+integerY;y++)
                 {
-                    if(!getMacroBoard()[macroX][macroY].equals("f"))
+                    Boolean test = currentState.getField().getBoard()[i][y].equals(".");
+                    
+                    if(test)
                     {
-                        getMacroBoard()[i][y] = "-1";
+                        System.out.println(i+""+y);
                     }
                 }
             }
         }
-
+        
     }
-}
+
