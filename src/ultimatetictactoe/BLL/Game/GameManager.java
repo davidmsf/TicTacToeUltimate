@@ -89,6 +89,9 @@ public class GameManager
         UpdateMacroboard(move);
         
         checkMicroWinner();
+        //checkMacroWinner();
+        
+        checkTakenFields(move.getX(), move.getY());
         
         allFieldsAvailable(move);
 
@@ -343,4 +346,52 @@ public class GameManager
         }
 
     }
+
+    private void checkTakenFields(int macroX, int macroY)
+    {
+        
+        String[][] board = currentState.getField().getBoard();
+ 
+        int posX = macroX %3;
+        int posY = macroY %3;
+        
+        int indexX = 0;
+        for(int x = 0; x < 7; x++)
+        {
+            
+            if(x % 3 == 0 || x == 0) 
+            {
+                int indexY = 0;
+                for(int y = 0; y < 7; y++)
+                {
+                    
+                    if(y % 3 == 0 || y == 0)
+                    {
+                        if(posX == indexX && posY == indexY)
+                        {
+                            checkIfMacroCellIsEmpty(board, y, x);
+                        }
+                        
+                        indexY++;
+                    }  
+                    
+                }
+
+                indexX++;
+            }
+        }
+    }
+
+    private void checkIfMacroCellIsEmpty(String[][] board, int y, int x) {
+        for(int i = 0; i < 3; i++)
+        {
+            for(int q = 0; q < 3; q++)
+            {
+                
+                System.out.print(board[y+q][x+i]);
+                
+            }
+        }
+    }
+
 }
