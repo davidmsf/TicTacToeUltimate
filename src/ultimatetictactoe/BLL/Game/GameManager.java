@@ -86,9 +86,11 @@ public class GameManager
 
       
         UpdateBoard(move);
-        UpdateMacroboard(move);
         allFieldsAvailable(move);
-        checkMicroWinner();
+
+        UpdateMacroboard(move);
+     
+                checkMicroWinner();
         Boolean gameWon = checkMacroWinner();
         if(gameWon)
         {
@@ -137,7 +139,7 @@ public class GameManager
     
     private void UpdateBoard(IMove move)
     {     
-        this.currentState.getField().getBoard()[move.getX()][move.getY()]= xOrO();
+        this.currentState.getField().getBoard()[move.getX()][move.getY()] = xOrO();
     }
     
     private void UpdateMacroboard(IMove move)
@@ -306,7 +308,7 @@ public class GameManager
     private void verticalCheck(String[][] board, String player)
     {
         
-        for(int x = 0; x < 7; x++)
+        for(int x = 0; x < 9; x++)
         {
             for(int y = 0; y < 7; y++)
             {
@@ -332,7 +334,7 @@ public class GameManager
     
     private void horizontalCheck(String[][] board, String player)
     {
-        for(int y = 0; y < 7; y++)
+        for(int y = 0; y < 9; y++)
         {
             for(int x = 0; x < 7; x++)
             {
