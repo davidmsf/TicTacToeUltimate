@@ -88,7 +88,6 @@ public class GameManager
         UpdateBoard(move);
         UpdateMacroboard(move);
         allFieldsAvailable(move);
-        
         checkMicroWinner();
         checkMacroWinner();
 
@@ -146,10 +145,44 @@ public class GameManager
         int macroXX = move.getX() % 3;
         int macroYY = move.getY() % 3;
         
+        String[][] macroBoard = this.currentState.getField().getMacroboard();
         
-        this.currentState.getField().getMacroboard()[macroX][macroY] = "1";
+        if(macroBoard[macroXX][macroYY].equals("X") 
+        || macroBoard[macroXX][macroYY].equals("O"))
+        {
+            System.out.println("XorO");
+            for(int x = 0; x < 3; x++)
+            {
+                for(int y = 0; y < 3; y++)
+                {
+                    if(!(macroBoard[x][y].equals("X") 
+                    || macroBoard[x][y].equals("O")))
+                    {
+                        macroBoard[x][y] = "-1";
+                    }
+                    
+                }
+            }
             
-        this.currentState.getField().getMacroboard()[macroXX][macroYY] = "-1";
+        }
+        else
+        {
+            System.out.println("RegularMove");
+            for(int x = 0; x < 3; x++)
+            {
+                for(int y = 0; y < 3; y++)
+                {
+                    if(!(macroBoard[x][y].equals("X") 
+                    || macroBoard[x][y].equals("O")))
+                    {
+                        macroBoard[x][y] = "1";
+                    }
+                }
+            }
+            
+            macroBoard[macroXX][macroYY] = "-1";
+        }
+        
     } 
     
     public String xOrO()
@@ -199,7 +232,7 @@ public class GameManager
     public void checkMicroWinner()
     {
 
-        String[][] board = currentState.getField().getBoard();
+        String[][] board = this.currentState.getField().getBoard();
         String player = xOrO();
                 
         horizontalCheck(board, player);
@@ -296,16 +329,16 @@ public class GameManager
     
     private void horizontalCheck(String[][] board, String player)
     {
-        for(int x = 0; x < 9; x++)
+        for(int y = 0; y < 9; y++)
         {
-            for(int y = 0; y < 7; y++)
+            for(int x = 0; x < 7; x++)
             {
-                if(y % 3 == 0 || y == 0)
+                if(x % 3 == 0 || x == 0)
                 {
 
-                    if(board[y][x].equals(board[y+1][x]) 
-                    && board[y+1][x].equals(board[y+2][x]) 
-                    && board[y][x].equals(player))
+                    if(board[x][y].equals(board[x+1][y]) 
+                    && board[x+1][y].equals(board[x+2][y]) 
+                    && board[x][y].equals(player))
                     {
 
                         int macroX = x / 3;
@@ -327,6 +360,7 @@ public class GameManager
         
         int integerI = 0;
         int integerY = 0;
+        boolean isFull = true;
         
         if(localX != 0)
         {
@@ -345,57 +379,17 @@ public class GameManager
                     
                     if(test)
                     {
-                        System.out.println(i+""+y);
+                        isFull = false;
                     }
                 }
             }
-        }
-
-    private void checkTakenFields(int macroX, int macroY)
-    {
-        
-        String[][] board = currentState.getField().getBoard();
- 
-        int posX = macroX %3;
-        int posY = macroY %3;
-        
-        int indexX = 0;
-        for(int x = 0; x < 7; x++)
-        {
             
-            if(x % 3 == 0 || x == 0) 
-            {
-                int indexY = 0;
-                for(int y = 0; y < 7; y++)
-                {
-                    
-                    if(y % 3 == 0 || y == 0)
-                    {
-                        if(posX == indexX && posY == indexY)
-                        {
-                            checkIfMacroCellIsEmpty(board, y, x);
-                        }
-                        
-                        indexY++;
-                    }  
-                    
-                }
-
-                indexX++;
-            }
-        }
-    }
-
-    private void checkIfMacroCellIsEmpty(String[][] board, int y, int x) {
-        for(int i = 0; i < 3; i++)
+        if(isFull)
         {
-            for(int q = 0; q < 3; q++)
-            {
-                
-                System.out.print(board[y+q][x+i]);
-                
-            }
+            this.currentState.getField().getMacroboard()[localX][localY] = "f";
         }
     }
+
+    
 
 }
