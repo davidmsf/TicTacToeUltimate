@@ -59,8 +59,6 @@ public class MainController implements Initializable {
                     @Override
                     public void handle(MouseEvent event) 
                     {         
-                        System.out.println(GridPane.getColumnIndex(node) + "NODE");
-                        System.out.println(GridPane.getRowIndex(node) + "NODE");
                         setMove(event, node);
                     }
                 });

@@ -80,24 +80,17 @@ public class GameManager
     {
         //Verify the new move
         if(!VerifyMoveLegality(move)) 
-        {   System.out.println("false move");
+        {   
             return false; 
         }
-        System.out.println("true move");
+
       
         UpdateBoard(move);
         UpdateMacroboard(move);
         allFieldsAvailable(move);
-
-        checkMicroWinner();
-
         
         checkMicroWinner();
-        //checkMacroWinner();
-        
-        checkTakenFields(move.getX(), move.getY());
-        
-        allFieldsAvailable(move);
+        checkMacroWinner();
 
         //Update currentPlayer
         currentPlayer = (currentPlayer + 1) % 2;
@@ -136,10 +129,7 @@ public class GameManager
     
     private Boolean VerifyMoveLegality(IMove move)
     {
-        //Test if the move is legal   
-        //NOTE: should also check whether the move is placed on an occupied spot.
-        System.out.println("Checking move validity against macroboard available field");
-        System.out.println("Not currently checking move validity actual board");
+
         return currentState.getField().isInActiveMicroboard(move.getX(), move.getY());
     }
     
@@ -155,6 +145,8 @@ public class GameManager
         
         int macroXX = move.getX() % 3;
         int macroYY = move.getY() % 3;
+        
+        
         this.currentState.getField().getMacroboard()[macroX][macroY] = "1";
             
         this.currentState.getField().getMacroboard()[macroXX][macroYY] = "-1";
@@ -180,8 +172,9 @@ public class GameManager
     }
     
 
-    private boolean checkMacroWinner(String player)
+    private boolean checkMacroWinner()
     {
+            String player = xOrO();
 
             String[][] moves = currentState.getField().getMacroboard();
             if((moves[0][0].equals(moves[1][1]) && moves[1][1].equals(moves[2][2]) && moves[0][0].equals(player)) 
