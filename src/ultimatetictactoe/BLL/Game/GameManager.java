@@ -87,15 +87,15 @@ public class GameManager
       
         UpdateBoard(move);
         allFieldsAvailable(move);
-
-        UpdateMacroboard(move);
-     
-                checkMicroWinner();
+        checkMicroWinner();
         Boolean gameWon = checkMacroWinner();
         if(gameWon)
         {
             System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!GAME WON GAME WON");
         }
+        UpdateMacroboard(move);
+     
+
         //Update currentPlayer
         currentPlayer = (currentPlayer + 1) % 2;
         
