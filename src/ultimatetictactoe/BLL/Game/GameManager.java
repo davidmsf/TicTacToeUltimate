@@ -153,7 +153,8 @@ public class GameManager
         String[][] macroBoard = this.currentState.getField().getMacroboard();
         
         if(macroBoard[macroXX][macroYY].equals("X") 
-        || macroBoard[macroXX][macroYY].equals("O"))
+        || macroBoard[macroXX][macroYY].equals("O")
+        || macroBoard[macroXX][macroYY].equals("f"))
         {
             System.out.println("XorO");
             for(int x = 0; x < 3; x++)
@@ -161,7 +162,8 @@ public class GameManager
                 for(int y = 0; y < 3; y++)
                 {
                     if(!(macroBoard[x][y].equals("X") 
-                    || macroBoard[x][y].equals("O")))
+                    || macroBoard[x][y].equals("O")
+                    || macroBoard[x][y].equals("f")))
                     {
                         macroBoard[x][y] = "-1";
                     }
@@ -178,7 +180,8 @@ public class GameManager
                 for(int y = 0; y < 3; y++)
                 {
                     if(!(macroBoard[x][y].equals("X") 
-                    || macroBoard[x][y].equals("O")))
+                    || macroBoard[x][y].equals("O")
+                    || macroBoard[x][y].equals("f")))
                     {
                         macroBoard[x][y] = "1";
                     }
@@ -385,12 +388,14 @@ public class GameManager
                     if(test)
                     {
                         isFull = false;
+                        System.out.println("ISnotFULL");
                     }
                 }
             }
             
         if(isFull)
         {
+            System.out.println("ISFULL");
             this.currentState.getField().getMacroboard()[localX][localY] = "f";
         }
     }
