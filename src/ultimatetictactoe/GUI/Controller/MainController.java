@@ -132,7 +132,7 @@ public class MainController implements Initializable {
                 btn.setStyle("-fx-background-color: green; "
                            + "-fx-text-fill: white; "
                            + "-fx-font-weight: bold;");
-                displayGameInfo.setText("   Turn: O");
+                displayGameInfo.setText("Turn: O");
                 displayGameInfo.setStyle("-fx-background-color: blue");
             }
             else
@@ -140,7 +140,7 @@ public class MainController implements Initializable {
                 btn.setStyle("-fx-background-color: blue; "
                            + "-fx-text-fill: white; "
                            + "-fx-font-weight: bold;");
-                displayGameInfo.setText("   Turn: X");
+                displayGameInfo.setText("Turn: X");
                 displayGameInfo.setStyle("-fx-background-color: green");
             }
             getAvailableMacroBoards();
