@@ -124,6 +124,14 @@ public class MainController implements Initializable {
         if(validMove){
             Button btn = (Button)node;
             btn.setText(XorO);
+            if(XorO.equals("X"))
+            {
+                btn.setStyle("-fx-background-color: green");
+            }
+            else
+            {
+                btn.setStyle("-fx-background-color: blue");
+            }
             getAvailableMacroBoards();
         }
         
