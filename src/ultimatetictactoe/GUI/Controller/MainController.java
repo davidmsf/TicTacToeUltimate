@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -132,6 +133,7 @@ public class MainController implements Initializable {
                 btn.setStyle("-fx-background-color: green; "
                            + "-fx-text-fill: white; "
                            + "-fx-font-weight: bold;");
+                displayGameInfo.setAlignment(Pos.CENTER);
                 displayGameInfo.setText("Turn: O");
                 displayGameInfo.setStyle("-fx-background-color: blue");
             }
@@ -140,6 +142,7 @@ public class MainController implements Initializable {
                 btn.setStyle("-fx-background-color: blue; "
                            + "-fx-text-fill: white; "
                            + "-fx-font-weight: bold;");
+                displayGameInfo.setAlignment(Pos.CENTER);
                 displayGameInfo.setText("Turn: X");
                 displayGameInfo.setStyle("-fx-background-color: green");
             }
