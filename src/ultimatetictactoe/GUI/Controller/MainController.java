@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -34,6 +35,8 @@ public class MainController implements Initializable {
     private GridPane[][] microBoards;
     
     private Model model;
+    @FXML
+    private Label displayGameInfo;
     
     
     @Override
@@ -126,11 +129,19 @@ public class MainController implements Initializable {
             btn.setText(XorO);
             if(XorO.equals("X"))
             {
-                btn.setStyle("-fx-background-color: green");
+                btn.setStyle("-fx-background-color: green; "
+                           + "-fx-text-fill: white; "
+                           + "-fx-font-weight: bold;");
+                displayGameInfo.setText("   Turn: O");
+                displayGameInfo.setStyle("-fx-background-color: blue");
             }
             else
             {
-                btn.setStyle("-fx-background-color: blue");
+                btn.setStyle("-fx-background-color: blue; "
+                           + "-fx-text-fill: white; "
+                           + "-fx-font-weight: bold;");
+                displayGameInfo.setText("   Turn: X");
+                displayGameInfo.setStyle("-fx-background-color: green");
             }
             getAvailableMacroBoards();
         }
