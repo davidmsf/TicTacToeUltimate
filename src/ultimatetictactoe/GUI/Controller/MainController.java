@@ -128,28 +128,12 @@ public class MainController implements Initializable {
         if(validMove){
             Button btn = (Button)node;
             btn.setText(XorO);
-            if(XorO.equals("X"))
-            {
-                btn.setStyle("-fx-background-color: green; "
-                           + "-fx-text-fill: white; "
-                           + "-fx-font-weight: bold;");
-                displayGameInfo.setAlignment(Pos.CENTER);
-                displayGameInfo.setText("Turn: O");
-                displayGameInfo.setStyle("-fx-background-color: blue");
-            }
-            else
-            {
-                btn.setStyle("-fx-background-color: blue; "
-                           + "-fx-text-fill: white; "
-                           + "-fx-font-weight: bold;");
-                displayGameInfo.setAlignment(Pos.CENTER);
-                displayGameInfo.setText("Turn: X");
-                displayGameInfo.setStyle("-fx-background-color: green");
-            }
+            setMoveStyle(XorO, btn);
             getAvailableMacroBoards();
         }
         
     }
+
 
     private void getAvailableMacroBoards() {
         String[][] availableMacroBoard = model.getAvailableMacroBoards();
@@ -189,5 +173,28 @@ public class MainController implements Initializable {
             }
         }
     }
+    
+    
+    
+    private void setMoveStyle(String XorO, Button btn) {
+    if(XorO.equals("X"))
+    {
+        btn.setStyle("-fx-background-color: green; "
+                + "-fx-text-fill: white; "
+                + "-fx-font-weight: bold;");
+        displayGameInfo.setAlignment(Pos.CENTER);
+        displayGameInfo.setText("Turn: O");
+        displayGameInfo.setStyle("-fx-background-color: blue");
+    }
+    else
+    {
+        btn.setStyle("-fx-background-color: blue; "
+                + "-fx-text-fill: white; "
+                + "-fx-font-weight: bold;");
+        displayGameInfo.setAlignment(Pos.CENTER);
+        displayGameInfo.setText("Turn: X");
+        displayGameInfo.setStyle("-fx-background-color: green");
+    }
+}
 
 }
