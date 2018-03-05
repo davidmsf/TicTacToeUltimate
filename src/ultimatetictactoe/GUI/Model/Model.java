@@ -44,7 +44,11 @@ public class Model {
     {
         return gameManager.checkMacroWinner();
     }
-
+    
+    public void clearBoard()
+    {
+        // To be made;
+    }
 
     
 }
