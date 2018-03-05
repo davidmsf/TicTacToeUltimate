@@ -5,7 +5,6 @@
  */
 package ultimatetictactoe.GUI.Model;
 
-import javafx.scene.layout.GridPane;
 import ultimatetictactoe.BLL.Game.GameManager;
 import ultimatetictactoe.BLL.Game.GameStateManager;
 import ultimatetictactoe.BLL.Move.IMove;
@@ -39,6 +38,11 @@ public class Model {
     {
         String[][] getAvailableMicroBoard = gameManager.getMacroBoard();
         return getAvailableMicroBoard;
+    }
+    
+    public boolean gameWon()
+    {
+        return gameManager.checkMacroWinner();
     }
 
 

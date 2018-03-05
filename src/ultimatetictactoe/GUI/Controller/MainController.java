@@ -12,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -38,6 +40,8 @@ public class MainController implements Initializable {
     private Model model;
     @FXML
     private Label displayGameInfo;
+    
+    private Button[][] buttons;
     
     
     @Override
@@ -76,8 +80,10 @@ public class MainController implements Initializable {
     /**
      *  BoardSetup
      */
-    private void initBoard() {
+    private void initBoard() 
+    {
         microBoards = new GridPane[3][3];
+        buttons = new Button[9][9];
         
         for(int i = 0; i < 9; i++)
         {
@@ -97,6 +103,7 @@ public class MainController implements Initializable {
                 microBoard.getColumnConstraints().add(new ColumnConstraints(80));
 
                 Button button = new Button();
+                buttons[i][q] = button;
                 GridPane.setVgrow(button, Priority.ALWAYS);
                 button.setMaxSize(40, 40);
                 microBoard.add(button, x % 3, y % 3);
@@ -125,11 +132,17 @@ public class MainController implements Initializable {
         IMove move = (IMove) ((Button) event.getSource()).getUserData();
         String XorO = model.getPlayer();
         boolean validMove = model.makeMove(move);
-        if(validMove){
+        if(validMove)
+        {
             Button btn = (Button)node;
             btn.setText(XorO);
             setMoveStyle(XorO, btn);
-            getAvailableMacroBoards();
+            getAvailableMacroBoards();  
+        }
+        if (model.gameWon()) 
+        {
+            makeWonMessage(XorO);
+            stopGame();
         }
         
     }
@@ -176,7 +189,8 @@ public class MainController implements Initializable {
     
     
     
-    private void setMoveStyle(String XorO, Button btn) {
+    private void setMoveStyle(String XorO, Button btn) 
+    {
     if(XorO.equals("X"))
     {
         btn.setStyle("-fx-background-color: green; "
@@ -195,6 +209,26 @@ public class MainController implements Initializable {
         displayGameInfo.setText("Turn: X");
         displayGameInfo.setStyle("-fx-background-color: green");
     }
-}
+    }
+    
+    private void makeWonMessage(String player)
+    {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Game Info");
+        alert.setHeaderText(null);
+        alert.setContentText(player + " " + "Won the game!!!");
+        alert.show();
+    }
+    
+    private void stopGame()
+    {
+        for(int i = 0;i<buttons.length;i++)
+        {
+            for(int y = 0;y<buttons.length;y++)
+            {
+                buttons[i][y].setDisable(true);
+            }
+        }
+    }
 
 }
