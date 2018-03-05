@@ -154,7 +154,7 @@ public class GameManager
         
         if(macroBoard[macroXX][macroYY].equals("X") 
         || macroBoard[macroXX][macroYY].equals("O")
-        || macroBoard[macroXX][macroYY].equals("f"))
+        || macroBoard[macroXX][macroYY].equals("F"))
         {
             System.out.println("XorO");
             for(int x = 0; x < 3; x++)
@@ -163,7 +163,7 @@ public class GameManager
                 {
                     if(!(macroBoard[x][y].equals("X") 
                     || macroBoard[x][y].equals("O")
-                    || macroBoard[x][y].equals("f")))
+                    || macroBoard[x][y].equals("F")))
                     {
                         macroBoard[x][y] = "-1";
                     }
@@ -181,7 +181,7 @@ public class GameManager
                 {
                     if(!(macroBoard[x][y].equals("X") 
                     || macroBoard[x][y].equals("O")
-                    || macroBoard[x][y].equals("f")))
+                    || macroBoard[x][y].equals("F")))
                     {
                         macroBoard[x][y] = "1";
                     }
@@ -363,8 +363,8 @@ public class GameManager
     
     public void allFieldsAvailable(IMove move)
     {
-        int localX = move.getX() % 3;
-        int localY = move.getY() % 3;
+        int localX = move.getX() / 3;
+        int localY = move.getY() / 3;
         
         int integerI = 0;
         int integerY = 0;
@@ -383,9 +383,9 @@ public class GameManager
             {
                 for(int y = integerY;y<3+integerY;y++)
                 {
-                    Boolean test = currentState.getField().getBoard()[i][y].equals(".");
+                    Boolean emptyCell = currentState.getField().getBoard()[i][y].equals(".");
                     
-                    if(test)
+                    if(emptyCell)
                     {
                         isFull = false;
                         System.out.println("ISnotFULL");
@@ -396,7 +396,7 @@ public class GameManager
         if(isFull)
         {
             System.out.println("ISFULL");
-            this.currentState.getField().getMacroboard()[localX][localY] = "f";
+            this.currentState.getField().getMacroboard()[localX][localY] = "F";
         }
     }
 
