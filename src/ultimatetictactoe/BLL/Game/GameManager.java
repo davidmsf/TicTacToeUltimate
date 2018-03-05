@@ -84,7 +84,6 @@ public class GameManager
             return false; 
         }
 
-      
         UpdateBoard(move);
         allFieldsAvailable(move);
         checkMicroWinner();
