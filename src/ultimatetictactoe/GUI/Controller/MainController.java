@@ -130,8 +130,9 @@ public class MainController implements Initializable {
 
     private void setMove(MouseEvent event, Node node)
     {
-        IMove move = (IMove) ((Button) event.getSource()).getUserData();
         String XorO = model.getPlayer();
+        IMove move = (IMove) ((Button) event.getSource()).getUserData();
+        
         boolean validMove = model.makeMove(move);
         if(validMove)
         {
@@ -140,12 +141,18 @@ public class MainController implements Initializable {
             setMoveStyle(XorO, btn);
             getAvailableMacroBoards();  
         }
-        if (model.gameWon()) 
+        
+        checkGameWin(XorO);  
+        botMove();
+        checkGameWin(XorO); 
+    }
+
+    private void checkGameWin(String XorO) {
+        if (model.gameWon())
         {
             makeWonMessage(XorO);
             stopGame();
         }
-        
     }
 
 
@@ -235,6 +242,11 @@ public class MainController implements Initializable {
     @FXML
     private void resetGame(ActionEvent event) 
     {
+    }
+
+    private void botMove() {
+        model.botMove();
+        IMove botMove = model.getBotMove();
     }
 
 }

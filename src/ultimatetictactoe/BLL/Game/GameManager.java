@@ -26,10 +26,20 @@ public class GameManager
     }
     
     private final IGameState currentState;
-    private int currentPlayer = 0; //player0 == 0 && player1 == 1
+    private int currentPlayer = 1; //player0 == 0 && player1 == 1
     private GameMode mode = GameMode.HumanVsHuman;
     private IBot bot = null;
     private IBot bot2 = null;
+    private IMove botMove;
+
+    public IMove getBotMove() {
+        return botMove;
+    }
+
+    public void setBotMove(IMove botMove) {
+        this.botMove = botMove;
+    }
+
 
     /**
      * Set's the currentState so the game can begin.
@@ -78,6 +88,7 @@ public class GameManager
      */
     public Boolean UpdateGame(IMove move)
     {
+        
         //Verify the new move
         if(!VerifyMoveLegality(move)) 
         {   
@@ -115,7 +126,8 @@ public class GameManager
             assert(bot != null);
             
             IMove botMove = bot.doMove(currentState);
-            
+            setBotMove(botMove);
+            System.out.println(" botMove X:"+botMove.getX()+" botMove Y:"+ botMove.getY());
             //Be aware that your bots might perform illegal moves.
             return UpdateGame(botMove);
         }
@@ -124,8 +136,7 @@ public class GameManager
         assert(bot != null);
         assert(bot2 != null);
         
-        //TODO: Implement a bot vs bot Update.
-        throw new UnsupportedOperationException("Not supported yet."); 
+       return false;
     }
     
     private Boolean VerifyMoveLegality(IMove move)

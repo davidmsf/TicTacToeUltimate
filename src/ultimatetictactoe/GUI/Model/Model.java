@@ -5,6 +5,7 @@
  */
 package ultimatetictactoe.GUI.Model;
 
+import ultimatetictactoe.BLL.Bot.Bot;
 import ultimatetictactoe.BLL.Game.GameManager;
 import ultimatetictactoe.BLL.Game.GameStateManager;
 import ultimatetictactoe.BLL.Move.IMove;
@@ -16,10 +17,12 @@ import ultimatetictactoe.BLL.Move.IMove;
 public class Model {
 
     private GameManager gameManager;
-
+    private Bot bot;
+    
     public Model() 
     {
-        gameManager = new GameManager(new GameStateManager());
+        bot = new Bot();
+        gameManager = new GameManager(new GameStateManager(), bot);
     }
     
     
@@ -48,6 +51,14 @@ public class Model {
     public void clearBoard()
     {
         // To be made;
+    }
+
+    public void botMove() {
+        gameManager.UpdateGame();
+    }
+
+    public IMove getBotMove() {
+       return gameManager.getBotMove();
     }
 
     
