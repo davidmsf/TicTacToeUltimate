@@ -94,17 +94,7 @@ public class FieldManager implements IField
     @Override
     public boolean isEmpty()
     {
-//        for(IMove imove : getAvailableMoves())
-//        {
-//           if(imove.getX() == playerMove.getX() && imove.getY() == playerMove.getY());
-//           {
-//           return true;
-//           }
-//        }
-//        return false;
-        
-        throw new UnsupportedOperationException("Not supported YET");
-        
+        return true; // To be implemented
     }
 
     @Override

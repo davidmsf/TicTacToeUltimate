@@ -85,18 +85,16 @@ public class GameManager
         }
 
         UpdateBoard(move);
-        allFieldsAvailable(move);
+        checkTieMicro(move);
         checkMicroWinner();
-        Boolean gameWon = checkMacroWinner();
-        if(gameWon)
-        {
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!GAME WON GAME WON");
-        }
         UpdateMacroboard(move);
      
 
         //Update currentPlayer
+        if(checkMacroWinner() == false)
+        {
         currentPlayer = (currentPlayer + 1) % 2;
+        }
         
         return true;
     }
@@ -142,10 +140,7 @@ public class GameManager
     }
     
     private void UpdateMacroboard(IMove move)
-    {
-        int macroX = move.getX() / 3;
-        int macroY = move.getY() / 3;   
-        
+    {        
         int macroXX = move.getX() % 3;
         int macroYY = move.getY() % 3;
         
@@ -212,7 +207,7 @@ public class GameManager
     }
     
 
-    private boolean checkMacroWinner()
+    public boolean checkMacroWinner()
     {
             String player = xOrO();
 
@@ -233,7 +228,6 @@ public class GameManager
             }
 
             return false;
-
     }
     
     public void checkMicroWinner()
@@ -360,7 +354,7 @@ public class GameManager
     
     
     
-    public void allFieldsAvailable(IMove move)
+    public void checkTieMicro(IMove move)
     {
         int localX = move.getX() / 3;
         int localY = move.getY() / 3;
@@ -397,6 +391,29 @@ public class GameManager
             System.out.println("ISFULL");
             this.currentState.getField().getMacroboard()[localX][localY] = "F";
         }
+    }
+    
+    public boolean checkTieMacro()
+    {
+        String tie = "F";
+
+        String[][] moves = currentState.getField().getMacroboard();
+        if ((moves[0][0].equals(moves[1][1]) && moves[1][1].equals(moves[2][2]) && moves[0][0].equals(tie))
+             || (moves[0][2].equals(moves[1][1]) && moves[1][1].equals(moves[2][0]) && moves[0][2].equals(tie))) 
+        {
+            return true;
+        }
+
+        for (int i = 0; i < 3; i++) 
+        {
+            if ((moves[i][0].equals(moves[i][1]) && moves[i][1].equals(moves[i][2]) && moves[i][0].equals(tie))
+                || (moves[0][i].equals(moves[1][i]) && moves[1][i].equals(moves[2][i]) && moves[0][i].equals(tie))) 
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     
