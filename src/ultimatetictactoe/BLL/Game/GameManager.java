@@ -26,7 +26,7 @@ public class GameManager
     }
     
     private final IGameState currentState;
-    private int currentPlayer = 1; //player0 == 0 && player1 == 1
+    private int currentPlayer = 0; //player0 == 0 && player1 == 1
     private GameMode mode = GameMode.HumanVsHuman;
     private IBot bot = null;
     private IBot bot2 = null;
@@ -79,7 +79,7 @@ public class GameManager
         mode = GameMode.BotVsBot;
         this.bot = bot;
         this.bot2 = bot2;
-    }
+    }   
     
     /**
      * User input driven Update
@@ -94,17 +94,17 @@ public class GameManager
         {   
             return false; 
         }
-
+        
         UpdateBoard(move);
         checkTieMicro(move);
         checkMicroWinner();
         UpdateMacroboard(move);
-     
-
+     System.out.println(currentPlayer+"!!!!!!!!!!!!!!!!!1111");
+        
         //Update currentPlayer
         if(checkMacroWinner() == false)
         {
-        currentPlayer = (currentPlayer + 1) % 2;
+            currentPlayer = (currentPlayer + 1) % 2;
         }
         
         return true;
@@ -148,6 +148,11 @@ public class GameManager
     private void UpdateBoard(IMove move)
     {     
         this.currentState.getField().getBoard()[move.getX()][move.getY()] = xOrO();
+        for(int i = 0; i<9;i++){
+            for(int x = 0; x<9;x++){
+                System.out.println(this.currentState.getField().getBoard()[i][x]);
+            }
+        }
     }
     
     private void UpdateMacroboard(IMove move)

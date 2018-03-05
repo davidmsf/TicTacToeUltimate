@@ -14,8 +14,8 @@ import ultimatetictactoe.BLL.Move.IMove;
  */
 public class Bot implements IBot{
 
-    int x = 4;
-    int y = 4;
+    int x = 1;
+    int y = 1;
     
     @Override
     public IMove doMove(IGameState state) {    

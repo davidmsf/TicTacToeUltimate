@@ -142,9 +142,10 @@ public class MainController implements Initializable {
             getAvailableMacroBoards();  
         }
         
-        checkGameWin(XorO);  
-        botMove();
         checkGameWin(XorO); 
+        String XorObot = model.getPlayer();
+        botMove(XorObot);
+        checkGameWin(XorObot); 
     }
 
     private void checkGameWin(String XorO) {
@@ -199,24 +200,24 @@ public class MainController implements Initializable {
     
     private void setMoveStyle(String XorO, Button btn) 
     {
-    if(XorO.equals("X"))
-    {
-        btn.setStyle("-fx-background-color: green; "
-                + "-fx-text-fill: white; "
-                + "-fx-font-weight: bold;");
-        displayGameInfo.setAlignment(Pos.CENTER);
-        displayGameInfo.setText("Turn: O");
-        displayGameInfo.setStyle("-fx-background-color: blue");
-    }
-    else
-    {
-        btn.setStyle("-fx-background-color: blue; "
-                + "-fx-text-fill: white; "
-                + "-fx-font-weight: bold;");
-        displayGameInfo.setAlignment(Pos.CENTER);
-        displayGameInfo.setText("Turn: X");
-        displayGameInfo.setStyle("-fx-background-color: green");
-    }
+        if(XorO.equals("X"))
+        {
+            btn.setStyle("-fx-background-color: green; "
+                    + "-fx-text-fill: white; "
+                    + "-fx-font-weight: bold;");
+            displayGameInfo.setAlignment(Pos.CENTER);
+            displayGameInfo.setText("Turn: O");
+            displayGameInfo.setStyle("-fx-background-color: blue");
+        }
+        else
+        {
+            btn.setStyle("-fx-background-color: blue; "
+                    + "-fx-text-fill: white; "
+                    + "-fx-font-weight: bold;");
+            displayGameInfo.setAlignment(Pos.CENTER);
+            displayGameInfo.setText("Turn: X");
+            displayGameInfo.setStyle("-fx-background-color: green");
+        }
     }
     
     private void makeWonMessage(String player)
@@ -244,9 +245,14 @@ public class MainController implements Initializable {
     {
     }
 
-    private void botMove() {
+    private void botMove(String XorO) {
         model.botMove();
         IMove botMove = model.getBotMove();
+        Button btn = (Button)buttons[botMove.getX()][botMove.getY()];
+        System.out.println(botMove.getX()+" !!!"+botMove.getY());
+        btn.setText(XorO);
+        setMoveStyle(XorO, btn);
+        getAvailableMacroBoards(); 
     }
 
 }
