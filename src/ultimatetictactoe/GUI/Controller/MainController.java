@@ -192,24 +192,24 @@ public class MainController implements Initializable {
     
     private void setMoveStyle(String XorO, Button btn) 
     {
-    if(XorO.equals("X"))
-    {
-        btn.setStyle("-fx-background-color: green; "
-                + "-fx-text-fill: white; "
-                + "-fx-font-weight: bold;");
-        displayGameInfo.setAlignment(Pos.CENTER);
-        displayGameInfo.setText("Turn: O");
-        displayGameInfo.setStyle("-fx-background-color: blue");
-    }
-    else
-    {
-        btn.setStyle("-fx-background-color: blue; "
-                + "-fx-text-fill: white; "
-                + "-fx-font-weight: bold;");
-        displayGameInfo.setAlignment(Pos.CENTER);
-        displayGameInfo.setText("Turn: X");
-        displayGameInfo.setStyle("-fx-background-color: green");
-    }
+        if(XorO.equals("X"))
+        {
+            btn.setStyle("-fx-background-color: green; "
+                    + "-fx-text-fill: white; "
+                    + "-fx-font-weight: bold;");
+            displayGameInfo.setAlignment(Pos.CENTER);
+            displayGameInfo.setText("Turn: O");
+            displayGameInfo.setStyle("-fx-background-color: blue");
+        }
+        else
+        {
+            btn.setStyle("-fx-background-color: blue; "
+                    + "-fx-text-fill: white; "
+                    + "-fx-font-weight: bold;");
+            displayGameInfo.setAlignment(Pos.CENTER);
+            displayGameInfo.setText("Turn: X");
+            displayGameInfo.setStyle("-fx-background-color: green");
+        }
     }
     
     private void makeWonMessage(String player)
