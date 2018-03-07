@@ -58,7 +58,7 @@ public class Bot implements IBot{
         }
         else if(depth == 0 || getAvailableCells(move).isEmpty())
         {
-            int points = player*checkPossiblekWinner(rootPlayer);
+            int points = player*checkPossiblekWinner();
             return points;
         }
         
@@ -68,7 +68,6 @@ public class Bot implements IBot{
         {
             
             board[cell.getX()][cell.getY()] = xOrO(player);
-            printBoard();
             int currentValue = -negaMax(cell, depth-1, -player, rootPlayer);
             bestValue = Math.max(bestValue, currentValue);
             if((currentValue == bestValue) && depth == 4)
@@ -170,25 +169,29 @@ public class Bot implements IBot{
     {
         int point = 0;
         if(player == rootPlayer){
-            point = 20;
+            point = 40;
         }
         else
         {
-            point = 1;
+            point = -40;
         }
         return point;
 
     }
 
-    private int checkPossiblekWinner(int rootPlayer) {
-        int point = 2;
+    private int checkPossiblekWinner() {
+        int point = 0;
         
         //Diagonal in multidimentional array
-        point += diagonalCheckLeftToRight(xOrO(rootPlayer)); 
-        point += diagonalCheckRightToLeft(xOrO(rootPlayer));
+        point += diagonalCheckLeftToRight("X"); 
+        point -= diagonalCheckLeftToRight("O"); 
+        point += diagonalCheckRightToLeft("X");
+        point -= diagonalCheckRightToLeft("O");
         //sideways og downward in multidimentional array
-        point += verticalCheck(xOrO(rootPlayer));
-        point += horizontalCheck(xOrO(rootPlayer));
+        point += verticalCheck("X");
+        point -= verticalCheck("O");
+        point += horizontalCheck("X");
+        point -= horizontalCheck("O");
         
         return point;
     }
@@ -219,7 +222,7 @@ public class Bot implements IBot{
                         && board[x+1][y+1].equals(board[x+2][y+2]) 
                         && board[x][y].equals(player))
                         {
-                            point += 10;
+                            point += 20;
                         }
                          
                     }
