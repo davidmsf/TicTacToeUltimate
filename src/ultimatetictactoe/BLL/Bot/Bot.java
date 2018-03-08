@@ -50,10 +50,24 @@ public class Bot implements IBot{
         return iMove;
     }
     
+    /**
+     * The Recursive method (method that calls itself) first checks if it has 
+     * reached its end to do evaluations that returns the score/points for the play.
+     * Then it fetches all the free cells(IMove) and foreach cell it sets the X or O
+     * in the 9x9 board from cells coorordinates. Then the metod calls itself changing the player
+     * and depth. When it reaches the previously mentioned end the points are returned and it then 
+     * compares them with the other cells(moves) to find the best point/value
+     * for the current plater which is returned to the root of the game tree. 
+     * Here it finds the cell(move) with the best points.
+     * https://en.wikipedia.org/wiki/Negamax
+     * @param move
+     * @param currentDepth
+     * @param player
+     * @param rootPlayer
+     * @return bestValue which stems from the comparison of best points for all the cells(moves).
+     */
     public int negaMax(IMove move, int currentDepth, int player, int rootPlayer)
     {
-        
-        
         if(checkWinner(xOrO(player)))
         {
             int points = player*calcPoints(player, rootPlayer);
@@ -69,24 +83,24 @@ public class Bot implements IBot{
         int bestValue = Integer.MIN_VALUE;
         for(IMove cell : getAvailableCells(move))
         {
-            
             board[cell.getX()][cell.getY()] = xOrO(player);
             int currentValue = -negaMax(cell, currentDepth-1, -player, rootPlayer);
             bestValue = Math.max(bestValue, currentValue);
+            //Test print of the root nodes values & coordinates 
             if(currentDepth == DEPTH)
             {
-                System.out.println("------------ X: "+cell.getX()+" Y"+cell.getY()+" SCORE:"+currentValue+" ------------------");
+                System.out.println("------------ X: "+cell.getX()
+                +" Y"+cell.getY()+" SCORE:"+currentValue+" ------------------");
             }
             if((currentValue == bestValue) && currentDepth == DEPTH)
             {
                 x = cell.getX();
                 y = cell.getY();
             }
-            
             board[cell.getX()][cell.getY()] = ".";
         }
+        
         return bestValue;
-
     }
     
     
@@ -109,24 +123,23 @@ public class Bot implements IBot{
     
     private boolean checkWinner(String player)
     {
+        String[][] moves = currentState.getField().getMacroboard();
+        if((moves[0][0].equals(moves[1][1]) && moves[1][1].equals(moves[2][2]) && moves[0][0].equals(player)) 
+        || (moves[0][2].equals(moves[1][1]) && moves[1][1].equals(moves[2][0]) && moves[0][2].equals(player)))
+        {
+            return true;
+        }
 
-            String[][] moves = currentState.getField().getMacroboard();
-            if((moves[0][0].equals(moves[1][1]) && moves[1][1].equals(moves[2][2]) && moves[0][0].equals(player)) 
-            || (moves[0][2].equals(moves[1][1]) && moves[1][1].equals(moves[2][0]) && moves[0][2].equals(player)))
+        for(int i = 0; i < 3; i++)
+        {
+            if((moves[i][0].equals(moves[i][1]) && moves[i][1].equals(moves[i][2]) && moves[i][0].equals(player)) 
+            || (moves[0][i].equals(moves[1][i]) && moves[1][i].equals(moves[2][i]) && moves[0][i].equals(player)))
             {
                 return true;
             }
+        }
 
-            for(int i = 0; i < 3; i++)
-            {
-                if((moves[i][0].equals(moves[i][1]) && moves[i][1].equals(moves[i][2]) && moves[i][0].equals(player)) 
-                || (moves[0][i].equals(moves[1][i]) && moves[1][i].equals(moves[2][i]) && moves[0][i].equals(player)))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+        return false;
     }
 
     private List<IMove> getAvailableCells(IMove move) {
