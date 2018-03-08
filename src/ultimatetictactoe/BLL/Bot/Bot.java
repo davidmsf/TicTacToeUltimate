@@ -50,11 +50,22 @@ public class Bot implements IBot{
                 if(macroBoard[i][y].equals("-1"))
                 {
                     int ii = i*3;
-                    if(board[ii].equals("."))
+                    int yy = y*3;
+                    if(board[ii+1][yy+1].equals("."))
                     {
-                        
+                        this.x = ii+1;
+                        this.y = yy+1;
                     }
-                    
+                    else if(board[ii][yy].equals("."))
+                    {
+                        this.x = ii;
+                        this.y = yy;
+                    }
+                    else if(board[ii+2][yy+2].equals("."))
+                    {
+                        this.x = ii;
+                        this.y = yy;
+                    }
                 }
             }
         }
