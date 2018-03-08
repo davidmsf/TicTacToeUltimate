@@ -402,6 +402,7 @@ public class GameManager
                 }
             }
             
+            
         if(isFull)
         {
             System.out.println("ISFULL");
@@ -409,29 +410,4 @@ public class GameManager
         }
     }
     
-    public boolean checkTieMacro()
-    {
-        String tie = "F";
-
-        String[][] moves = currentState.getField().getMacroboard();
-        if ((moves[0][0].equals(moves[1][1]) && moves[1][1].equals(moves[2][2]) && moves[0][0].equals(tie))
-             || (moves[0][2].equals(moves[1][1]) && moves[1][1].equals(moves[2][0]) && moves[0][2].equals(tie))) 
-        {
-            return true;
-        }
-
-        for (int i = 0; i < 3; i++) 
-        {
-            if ((moves[i][0].equals(moves[i][1]) && moves[i][1].equals(moves[i][2]) && moves[i][0].equals(tie))
-                || (moves[0][i].equals(moves[1][i]) && moves[1][i].equals(moves[2][i]) && moves[0][i].equals(tie))) 
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    
-
 }

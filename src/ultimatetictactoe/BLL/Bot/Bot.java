@@ -213,6 +213,8 @@ public class Bot implements IBot{
         point -= verticalCheck("O");
         point += horizontalCheck("X");
         point -= horizontalCheck("O");
+        
+       // point += macroBoardCheck("X");
 
         return point;
     }
@@ -248,7 +250,8 @@ public class Bot implements IBot{
                           
                         }
                         
-                        if(player.equals("X")){
+                        if(player.equals("X"))
+                        {
                             if(board[x][y].equals(board[x+1][y+1]) 
                             && board[x][y].equals("O") 
                             && board[x+2][y+2].equals("X"))
@@ -280,7 +283,6 @@ public class Bot implements IBot{
         
        return point;
 
-        
     }
   
     
@@ -513,6 +515,28 @@ public class Bot implements IBot{
             }
         }
         
+    }
+
+    private int macroBoardCheck(String player) {
+        int point = 0;
+        
+        String[][] moves = currentState.getField().getMacroboard();
+        if((moves[0][0].equals(moves[1][1]) && moves[1][1].equals(moves[2][2]) && moves[0][0].equals(player)) 
+        || (moves[0][2].equals(moves[1][1]) && moves[1][1].equals(moves[2][0]) && moves[0][2].equals(player)))
+        {
+            point += 35;
+        }
+
+        for(int i = 0; i < 3; i++)
+        {
+            if((moves[i][0].equals(moves[i][1]) && moves[i][1].equals(moves[i][2]) && moves[i][0].equals(player)) 
+            || (moves[0][i].equals(moves[1][i]) && moves[1][i].equals(moves[2][i]) && moves[0][i].equals(player)))
+            {
+                point += 35;
+            }
+        }
+        
+        return point;
     }
     
     
