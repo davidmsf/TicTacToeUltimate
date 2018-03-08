@@ -18,13 +18,13 @@ public class Bot implements IBot{
     int y = 4;
     String macroBoard [][];
     String board[][];
-    IGameState gameState;
     @Override
     public IMove doMove(IGameState state) 
     {    
         macroBoard = state.getField().getMacroboard();
         board = state.getField().getBoard();
-        gameState = state;
+        getAvailableField();
+        
         IMove iMove = new IMove() 
         {
             @Override
