@@ -25,12 +25,22 @@ public class GameManager
         BotVsBot
     }
     
+    
+    public enum gameOverState
+    {
+        Active,
+        Win,
+        Tie
+    }
+    private boolean fortest = true;
     private final IGameState currentState;
     private int currentPlayer = 0; //player0 == 0 && player1 == 1
     private GameMode mode = GameMode.HumanVsHuman;
     private IBot bot = null;
     private IBot bot2 = null;
     private IMove botMove;
+    
+     private volatile gameOverState gameOver = gameOverState.Active;
 
     public IMove getBotMove() {
         return botMove;
@@ -38,6 +48,16 @@ public class GameManager
 
     public void setBotMove(IMove botMove) {
         this.botMove = botMove;
+    }
+    
+        
+        public void setGameOver(gameOverState state) 
+        {
+        gameOver = state;
+    }
+    public gameOverState getGameOver() 
+    {
+        return gameOver;
     }
 
 
@@ -116,16 +136,26 @@ public class GameManager
      */
     public Boolean UpdateGame()
     {
+        
         //Check game mode is set to one of the bot modes.
         assert(mode != GameMode.HumanVsHuman);
         
         //Check if player is bot, if so, get bot input and update the state based on that.
-        if(mode == GameMode.HumanVsBot && currentPlayer == 1)
+        if(mode == GameMode.BotVsBot)
         {
             //Check bot is not equal to null, and throw an exception if it is.
             assert(bot != null);
-            
-            IMove botMove = bot.doMove(currentState);
+             IMove botMove;
+            if(fortest == true)
+            {
+                 botMove = bot.doMove(currentState);
+                 fortest = false;
+            }
+            else
+            {
+                 botMove = bot2.doMove(currentState);
+                 fortest = true;
+            }
             setBotMove(botMove);
             System.out.println(" botMove X:"+botMove.getX()+" botMove Y:"+ botMove.getY());
             //Be aware that your bots might perform illegal moves.

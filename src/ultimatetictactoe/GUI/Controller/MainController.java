@@ -7,6 +7,8 @@ package ultimatetictactoe.GUI.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -21,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import ultimatetictactoe.BLL.Game.GameManager;
 import ultimatetictactoe.BLL.Move.IMove;
 import ultimatetictactoe.GUI.Model.Model;
 
@@ -31,11 +34,12 @@ import ultimatetictactoe.GUI.Model.Model;
 public class MainController implements Initializable {
     
 
-    
+    int xx = 0;
+        int yy = 0;
     @FXML
     private GridPane macroBoard;
     
-   
+    boolean test;
     private GridPane[][] microBoards;
     
     private Model model;
@@ -241,11 +245,39 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void resetGame(ActionEvent event) 
+    private synchronized void resetGame(ActionEvent event) 
     {
+        
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() 
+            {
+                                   while(model.getGameOver() == model.getGameOver().Active)
+            {
+                                       try {
+                                           Thread.sleep(500);
+                                       } catch (InterruptedException ex) {
+                                           Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+                                       }
+
+            String testing = model.getPlayer();
+            botMove(testing);
+            if(testing())
+            {
+                model.setGameOver(GameManager.gameOverState.Win);
+                makeWonMessage(testing);
+            }
+
+        }
+            }
+        });
+        thread.setDaemon(true);
+        thread.start();
+
     }
 
-    private void botMove(String XorO) {
+    private void botMove(String XorO) 
+    {
         model.botMove();
         IMove botMove = model.getBotMove();
         Button btn = (Button)buttons[botMove.getX()][botMove.getY()];
@@ -254,5 +286,23 @@ public class MainController implements Initializable {
         setMoveStyle(XorO, btn);
         getAvailableMacroBoards(); 
     }
+    
+    private boolean testing()
+    {
+        Boolean test = true;
+        
+        for(int i = 0;i<3;i++)
+        {
+            for(int y = 0;y<3;y++)
+            {
+                if(model.macroBoard()[i][y].equals("-1"))
+                {
+                    test = false;
+                }
+            }
+        }
+        return test;
+    }
+    
 
 }

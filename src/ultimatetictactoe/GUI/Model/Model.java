@@ -7,6 +7,7 @@ package ultimatetictactoe.GUI.Model;
 
 import ultimatetictactoe.BLL.Bot.Bot;
 import ultimatetictactoe.BLL.Game.GameManager;
+import ultimatetictactoe.BLL.Game.GameManager.gameOverState;
 import ultimatetictactoe.BLL.Game.GameStateManager;
 import ultimatetictactoe.BLL.Move.IMove;
 
@@ -18,11 +19,13 @@ public class Model {
 
     private GameManager gameManager;
     private Bot bot;
+    private Bot bot2;
     
     public Model() 
     {
         bot = new Bot();
-        gameManager = new GameManager(new GameStateManager(), bot);
+        bot2 = new Bot();
+        gameManager = new GameManager(new GameStateManager(), bot, bot2);
     }
     
     
@@ -59,6 +62,21 @@ public class Model {
 
     public IMove getBotMove() {
        return gameManager.getBotMove();
+    }
+    
+        
+        public void setGameOver(gameOverState state) 
+        {
+        gameManager.setGameOver(state);
+    }
+    public gameOverState getGameOver() 
+    {
+        return gameManager.getGameOver();
+    }
+    
+    public String[][] macroBoard()
+    {
+        return gameManager.getMacroBoard();
     }
 
     
