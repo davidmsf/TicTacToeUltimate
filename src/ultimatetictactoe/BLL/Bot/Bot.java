@@ -20,7 +20,7 @@ public class Bot implements IBot{
     private IGameState currentState;
     private String[][] board;
     private IMove firstMove;
-    private final int DEPTH = 2;
+    private final int DEPTH = 4;
     private final int THREEONROW = 30;
     private int x;
     private int y;
