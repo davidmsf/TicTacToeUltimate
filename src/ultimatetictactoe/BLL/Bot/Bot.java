@@ -20,6 +20,7 @@ public class Bot implements IBot{
     private IGameState currentState;
     private String[][] board;
     private IMove firstMove;
+    private List<IMove> madeMoves;
     private final int DEPTH = 4;
     private final int THREEONROW = 30;
     private int x;
@@ -29,6 +30,7 @@ public class Bot implements IBot{
     public IMove doMove(IGameState state) {    
         currentState = state;
         board = currentState.getField().getBoard();
+        madeMoves = new ArrayList();
         
         getFirstMove();
         int bestValue = negaMax(firstMove, DEPTH, 1, 1);
@@ -103,6 +105,23 @@ public class Bot implements IBot{
         return bestValue;
     }
     
+
+
+
+
+
+    private int simple_points() {
+        int point = 0;
+        
+        for(int i = 0; i < 3; i++)
+        {
+        }
+        return 1;
+
+    }
+
+
+
     
       
     public String xOrO(int player)
@@ -214,8 +233,9 @@ public class Bot implements IBot{
         point += horizontalCheck("X");
         point -= horizontalCheck("O");
         
-       // point += macroBoardCheck("X");
-
+        point += macroBoardCheck("X");
+        point -= macroBoardCheck("O");
+        
         return point;
     }
     
@@ -233,11 +253,15 @@ public class Bot implements IBot{
                     if(y % 3 == 0 || y == 0)
                     {
                         
-                        if(board[x][y].equals(board[x+1][y+1]) && board[x][y].equals(player)) 
+                        if(board[x][y].equals(board[x+1][y+1]) 
+                        && board[x+2][y+2].equals(".") 
+                        && board[x][y].equals(player)) 
                         {
                             point += 2;
                         }
-                        if(board[x+1][y+1].equals(board[x+2][y+2]) && board[x+1][y+1].equals(player)) 
+                        if(board[x+1][y+1].equals(board[x+2][y+2]) 
+                        && board[x][y].equals(".") 
+                        && board[x+1][y+1].equals(player)) 
                         {
                             point += 2;
                         }
@@ -300,11 +324,15 @@ public class Bot implements IBot{
                     if(y % 3 == 0 || y == 0)
                     {
                         
-                        if(board[x][y+2].equals(board[x+1][y+1]) && board[x][y+2].equals(player)) 
+                        if(board[x][y+2].equals(board[x+1][y+1]) 
+                        && board[x+2][y].equals(".") 
+                        && board[x][y+2].equals(player)) 
                         {
                             point += 2;
                         }
-                        if(board[x+1][y+1].equals(board[x+2][y]) && board[x+1][y+1].equals(player)) 
+                        if(board[x+1][y+1].equals(board[x+2][y]) 
+                        && board[x][y+2].equals(".") 
+                        && board[x+1][y+1].equals(player)) 
                         {
                             point += 2;
                         }
@@ -361,11 +389,15 @@ public class Bot implements IBot{
                 if(y % 3 == 0 || y == 0)
                 {
                     
-                    if(board[x][y].equals(board[x][y+1]) && board[x][y].equals(player)) 
+                    if(board[x][y].equals(board[x][y+1]) 
+                    && board[x][y+2].equals(".") 
+                    &&  board[x][y].equals(player)) 
                     {
                         point += 2;
                     }
-                    if(board[x][y+1].equals(board[x][y+2]) && board[x][y+1].equals(player)) 
+                    if(board[x][y+1].equals(board[x][y+2]) 
+                    && board[x][y].equals(".") 
+                    && board[x][y+1].equals(player)) 
                     {
                         point += 2;
 
@@ -423,12 +455,17 @@ public class Bot implements IBot{
                 if(x % 3 == 0 || x == 0)
                 {
                     
-                    if(board[x][y].equals(board[x+1][y]) && board[x][y].equals(player)) 
+                    if(board[x][y].equals(board[x+1][y]) 
+                    && board[x+2][y].equals(".") 
+                    && board[x][y].equals(player)) 
                     {
                         point += 2;
 
                     }
-                    if(board[x+1][y].equals(board[x+2][y]) && board[x+1][y].equals(player)) 
+                    
+                    if(board[x+1][y].equals(board[x+2][y]) 
+                    && board[x][y].equals(".") 
+                    && board[x+1][y].equals(player)) 
                     {
                         point += 2;
                     }
@@ -521,18 +558,43 @@ public class Bot implements IBot{
         int point = 0;
         
         String[][] moves = currentState.getField().getMacroboard();
-        if((moves[0][0].equals(moves[1][1]) && moves[1][1].equals(moves[2][2]) && moves[0][0].equals(player)) 
-        || (moves[0][2].equals(moves[1][1]) && moves[1][1].equals(moves[2][0]) && moves[0][2].equals(player)))
-        {
-            point += 35;
-        }
 
+        if(moves[0][0].equals(moves[1][1]) && moves[0][0].equals(player))
+        {
+            point += 20;
+        }
+        if(moves[1][1].equals(moves[2][2]) && moves[1][1].equals(player))
+        {
+            point += 20;
+        }
+        
+        if(moves[0][2].equals(moves[1][1]) && moves[0][2].equals(player))
+        {
+            point += 20;
+        }
+        if(moves[1][1].equals(moves[2][0]) && moves[1][1].equals(player))
+        {
+            point += 20;
+        }
+        
         for(int i = 0; i < 3; i++)
         {
-            if((moves[i][0].equals(moves[i][1]) && moves[i][1].equals(moves[i][2]) && moves[i][0].equals(player)) 
-            || (moves[0][i].equals(moves[1][i]) && moves[1][i].equals(moves[2][i]) && moves[0][i].equals(player)))
+            if(moves[i][0].equals(moves[i][1]) && moves[i][0].equals(player))
             {
-                point += 35;
+                point += 20;
+            }
+            if(moves[i][1].equals(moves[i][2]) && moves[i][1].equals(player))
+            {
+                point += 20;
+            }
+
+            if(moves[0][i].equals(moves[1][i]) && moves[0][i].equals(player))
+            {
+                point += 20;
+            }
+            if(moves[1][i].equals(moves[2][i]) && moves[1][i].equals(player))
+            {
+                point += 20;
             }
         }
         
@@ -541,5 +603,49 @@ public class Bot implements IBot{
     
     
     
+    
+    private void setMadeMoves(IMove move)
+    {
+        madeMoves.add(move);
+    }
+    
+    private void checkMovesHelpingOpponent(String player) {
+        
+        int point = 0; 
+        for(IMove move : madeMoves)
+        {
+            int localX = move.getX() % 3;
+            int localY = move.getY() % 3;
+
+            int integerI = 0;
+            int integerY = 0;
+
+            if(localX != 0)
+            {
+                integerI = localX*3;
+            }
+            if(localY != 0)
+            {
+                integerY = localY*3;
+            }
+
+            for(int i = integerI;i<3+integerI;i++)
+            {
+                for(int q = integerY;q<3+integerY;q++)
+                {
+                    if(board[i][q].equals(board[i][1]) && board[i][0].equals(player))
+                    {
+                        point += 20;
+                    }
+                    if(board[i][1].equals(board[i][2]) && board[i][1].equals(player))
+                    {
+                        point += 20;
+                    }
+                    
+                }
+            }
+
+        }
+    }
     
 }

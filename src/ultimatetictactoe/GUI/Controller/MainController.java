@@ -164,7 +164,7 @@ public class MainController implements Initializable {
         {
             for(int y = 0; y < 3; y++)
             {
-                    System.out.println(availableMacroBoard[x][y]);
+      
                     for(Node node : microBoards[x][y].getChildren())
                     {  
                         
@@ -249,7 +249,6 @@ public class MainController implements Initializable {
         model.botMove();
         IMove botMove = model.getBotMove();
         Button btn = (Button)buttons[botMove.getX()][botMove.getY()];
-        System.out.println(botMove.getX()+" !!!"+botMove.getY());
         btn.setText(XorO);
         setMoveStyle(XorO, btn);
         getAvailableMacroBoards(); 
